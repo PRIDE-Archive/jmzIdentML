@@ -47,10 +47,10 @@ public class MzIdentMLMarshallerTest {
 
         MzIdentMLMarshaller m = new MzIdentMLMarshaller();
         assertNotNull(m);
-
+        File outputFile =  File.createTempFile("output", ".xml");
         FileWriter writer = null;
         try {
-            writer = new FileWriter("output.xml");
+            writer = new FileWriter(outputFile);
 
             // mzIdentML
             //     cvList
@@ -182,7 +182,6 @@ public class MzIdentMLMarshallerTest {
         } finally {
             if (writer != null) writer.close();
         }
-        File outputFile = new File("output.xml");
         unmarshaller = new MzIdentMLUnmarshaller(outputFile);
         MzIdentML mzIdentMl = unmarshaller.unmarshal(MzIdentMLElement.MzIdentML);
 
@@ -201,7 +200,7 @@ public class MzIdentMLMarshallerTest {
         assertTrue(peptideEvidencePeptideCount >= 0);
         assertTrue(mzIdentMl.getSequenceCollection().getPeptideEvidence().size()
                 == peptideEvidencePeptideCount);
-        outputFile.delete();
+        outputFile.deleteOnExit();
     }
 
 
@@ -234,15 +233,16 @@ public class MzIdentMLMarshallerTest {
     public void testMarshall() throws  Exception{
         URL xmlFileURL = MzIdentMLMarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
 
-       // Lazy caching of the JAXB Context.
-       JAXBContext jc = JAXBContext.newInstance(ModelConstants.PACKAGE);
-       //create unmarshaller
+        // Lazy caching of the JAXB Context.
+        JAXBContext jc = JAXBContext.newInstance(ModelConstants.PACKAGE);
+        //create unmarshaller
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         Object object = unmarshaller.unmarshal(xmlFileURL);
-        File outputFile = new File("output2.xml");
+        File outputFile =  File.createTempFile("output2", ".xml");
         Marshaller marshaller = jc.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         marshaller.marshal(object,outputFile);
+        outputFile.deleteOnExit();
     }
 
 
