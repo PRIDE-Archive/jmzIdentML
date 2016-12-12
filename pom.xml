@@ -8,7 +8,23 @@
     <name>mzIdentML Java core API</name>
     <url>https://github.com/PRIDE-Utilities/jmzIdentML</url>
 
+    <parent>
+        <groupId>uk.ac.ebi.pride.architectural</groupId>
+        <artifactId>pride-core</artifactId>
+        <version>1.0.1</version>
+    </parent>
+
     <developers>
+        <developer>
+            <id>mbernal</id>
+            <name>Manuel Bernal-Llinares</name>
+            <organization>Proteomics Team, EMBL-European Bioinformatics Institute</organization>
+            <organizationUrl>http://www.ebi.ac.uk/pride</organizationUrl>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>Europe/London</timezone>
+        </developer>
         <developer>
             <name>Yasset Perez-Riverol</name>
             <id>ypriverol</id>
@@ -19,63 +35,65 @@
     </developers>
 
     <properties>
+        <uk.ac.ebi.pride.architectural.pride-logging.version>1.0.0</uk.ac.ebi.pride.architectural.pride-logging.version>
+        <uk.ac.ebi.pride.architectural.pride-tdd.version>1.0.3</uk.ac.ebi.pride.architectural.pride-tdd.version>
+        <psidev.psi.tools-xxindex.version>0.20</psidev.psi.tools-xxindex.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <log4j.version>1.2.13</log4j.version>
-        <junit.version>4.5</junit.version>
-        <woodstox.version>4.3.0</woodstox.version>
-        <jaxb.version>2.2.7</jaxb.version>
-        <xxindex.version>0.18</xxindex.version>
-        <fastutil.version>6.5.1</fastutil.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
+            <version>1.2.17</version>
         </dependency>
+        <!-- Logging, from PRIDE, is included here, but this project needs log4j, and pride-logging combines slf4j with
+                logback, which is supposed to be more modern. A discussion should take place here about whether or not a
+                particular slf4j backend should be included in pride-logging. From my (mbernal) point of view, it makes sense
+                that, from pride architectural packages we try to push for certain technologies, giving the client artifact the
+                freedom to not use them and opt for a different one, like in this case, where instead of using logback, this
+                artifact is using log4j -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>uk.ac.ebi.pride.architectural</groupId>
+            <artifactId>pride-logging</artifactId>
+            <version>${uk.ac.ebi.pride.architectural.pride-logging.version}</version>
+            <type>pom</type>
+        </dependency>
+        <!-- TDD -->
+        <dependency>
+            <groupId>uk.ac.ebi.pride.architectural</groupId>
+            <artifactId>pride-tdd</artifactId>
+            <version>${uk.ac.ebi.pride.architectural.pride-tdd.version}</version>
+            <type>pom</type>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.codehaus.woodstox</groupId>
             <artifactId>woodstox-core-asl</artifactId>
-            <version>${woodstox.version}</version>
+            <version>4.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-xjc</artifactId>
-            <version>${jaxb.version}</version>
+            <version>2.2.7</version>
         </dependency>
         <dependency>
             <groupId>psidev.psi.tools</groupId>
             <artifactId>xxindex</artifactId>
-            <version>${xxindex.version}</version>
+            <version>${psidev.psi.tools-xxindex.version}</version>
         </dependency>
 
         <!-- needed for EscapingXMLStreamWriter to cope with ASCII control characters that are not properly escaped in JAXB -->
         <dependency>
             <groupId>it.unimi.dsi</groupId>
             <artifactId>fastutil</artifactId>
-            <version>${fastutil.version}</version>
+            <version>6.5.1</version>
         </dependency>
 
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>
@@ -84,22 +102,6 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.7</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <additionalparam>-Xdoclint:none</additionalparam>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -154,73 +156,15 @@
                     </args>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <remoteTagging>true</remoteTagging>
-                    <goals>deploy</goals>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.3</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-
-    <repositories>
-        <repository>
-            <id>nexus-ebi-release-repo</id>
-            <url>http://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-repo/</url>
-        </repository>
-        <repository>
-            <id>nexus-ebi-snapshot-repo</id>
-            <url>http://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-snapshots/</url>
-        </repository>
-        <repository>
-            <id>springsource-repo</id>
-            <name>SpringSource Repository</name>
-            <url>http://repo.springsource.org/release</url>
-        </repository>
-        <repository>
-            <id>JBoss</id>
-            <name>JBoss repository</name>
-            <url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
-
-    <!-- PluginRepositores -->
-    <pluginRepositories>
-        <pluginRepository>
-            <id>maven2-repository.dev.java.net</id>
-            <url>http://download.java.net/maven/2</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <!-- Overwrites the previous repositories-->
-    <distributionManagement>
-        <!-- EBI repo -->
-        <repository>
-            <id>pst-release</id>
-            <name>EBI Nexus Repository</name>
-            <url>http://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-release</url>
-        </repository>
-        <!-- EBI SNAPSHOT repo -->
-        <snapshotRepository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>pst-snapshots</id>
-            <name>EBI Nexus Snapshots Repository</name>
-            <url>http://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <!--scm git config-->
     <scm>
