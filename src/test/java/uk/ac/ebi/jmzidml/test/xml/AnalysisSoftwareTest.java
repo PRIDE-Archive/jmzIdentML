@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftwareList;
@@ -20,7 +20,7 @@ import static junit.framework.Assert.*;
  */
 public class AnalysisSoftwareTest {
 
-    private static final Logger log = Logger.getLogger(AnalysisSoftwareTest.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AnalysisSoftwareTest.class);
 
     @Test
     public void testAnalysisSoftwareInformation() throws Exception {
@@ -46,12 +46,12 @@ public class AnalysisSoftwareTest {
         while(asl.hasNext()){
             AnalysisSoftware as = asl.next();
             assertNotNull(as);
-            log.debug("\n Analysis Software -> Name : " + as.getName() + " \t Software : "
+            logger.debug("\n Analysis Software -> Name : " + as.getName() + " \t Software : "
                     + as.getCustomizations() + "\t URI" + as.getUri());
             assertTrue("Analysis software is from Mascot.", as.getName().contains("Mascot"));
             if (MzIdentMLElement.ContactRole.isAutoRefResolving() && as.getContactRole().getContactRef() != null) {
                 assertNotNull(as.getContactRole().getContact());
-                log.debug("\n Analysis Software -> ContactRole -> Name  :" + as.getContactRole().getContact().getName());
+                logger.debug("\n Analysis Software -> ContactRole -> Name  :" + as.getContactRole().getContact().getName());
                 /**
                  * Testing that only organization is returned (in this test file analysis software instances only
                  * have Organization ContactRoles.

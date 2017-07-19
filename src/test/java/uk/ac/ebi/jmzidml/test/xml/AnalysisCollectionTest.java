@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.model.mzidml.params.SearchDatabaseCvParam;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class AnalysisCollectionTest extends TestCase {
 
-    private static final Logger log = Logger.getLogger(AnalysisCollectionTest.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AnalysisCollectionTest.class);
 
     public void testAnalysisCollectionInformation() throws Exception {
 
@@ -38,16 +38,16 @@ public class AnalysisCollectionTest extends TestCase {
         assertNotNull(pd);
         assertNotNull(si);
 
-        log.debug("Protein Detection: " + pd.getId() + "\t" + pd.getName());
+        logger.debug("Protein Detection: " + pd.getId() + "\t" + pd.getName());
         if (MzIdentMLElement.ProteinDetection.isAutoRefResolving() && pd.getProteinDetectionListRef() != null) {
             ProteinDetectionList pdl = pd.getProteinDetectionList();
             assertNotNull(pdl);
-            log.debug("Protein Detection List: Name: " + pdl.getName() + "\t Id : " + pdl.getId());
+            logger.debug("Protein Detection List: Name: " + pdl.getName() + "\t Id : " + pdl.getId());
 
             int pagCnt = pdl.getProteinAmbiguityGroup().size();
             assertTrue(pagCnt == 5);
             for (ProteinAmbiguityGroup proteinAmbiguityGroup : pdl.getProteinAmbiguityGroup()) {
-                log.debug("Protein Ambiguity Group: Id: " + proteinAmbiguityGroup.getId()
+                logger.debug("Protein Ambiguity Group: Id: " + proteinAmbiguityGroup.getId()
                         + "\t Name: " + proteinAmbiguityGroup.getName());
 
 
@@ -57,7 +57,7 @@ public class AnalysisCollectionTest extends TestCase {
                     if (MzIdentMLElement.ProteinDetectionHypothesis.isAutoRefResolving() && protHypo.getDBSequenceRef() != null) {
                         DBSequence seq = protHypo.getDBSequence();
                         assertNotNull(seq);
-                        log.debug(" Protein Detection Hypothesis: DBSequence Accn: " + protHypo.getDBSequence().getAccession()
+                        logger.debug(" Protein Detection Hypothesis: DBSequence Accn: " + protHypo.getDBSequence().getAccession()
                                 + " seq length:" + protHypo.getDBSequence().getLength());
                         assertTrue(seq.getLength() > 0);
                         assertNotNull(seq.getAccession());
@@ -73,7 +73,7 @@ public class AnalysisCollectionTest extends TestCase {
                         if (MzIdentMLElement.PeptideHypothesis.isAutoRefResolving() && pepHypo.getPeptideEvidenceRef() != null) {
                             PeptideEvidence pepEvd = pepHypo.getPeptideEvidence();
                             assertNotNull(pepEvd);
-                            log.debug("Peptide Evidence Name: " + pepEvd.getName());
+                            logger.debug("Peptide Evidence Name: " + pepEvd.getName());
                             if (MzIdentMLElement.PeptideEvidence.isAutoRefResolving() && pepEvd.getDBSequenceRef() != null) {
                                 assertNotNull(pepEvd.getDBSequence());
                             } else {
@@ -113,7 +113,7 @@ public class AnalysisCollectionTest extends TestCase {
         while(si.hasNext()){
 
             SpectrumIdentification sid = si.next();
-            log.debug("SpectrumIdentification Id :" + sid.getId());
+            logger.debug("SpectrumIdentification Id :" + sid.getId());
             assertNotNull(sid.getId());
 
 
@@ -142,7 +142,7 @@ public class AnalysisCollectionTest extends TestCase {
             if (MzIdentMLElement.InputSpectra.isAutoRefResolving() && iSpectra.getSpectraDataRef() != null) {
                 String spectraID = iSpectra.getSpectraData().getId();
                 assertNotNull(spectraID);
-                log.debug("Input Spectra : " + spectraID);
+                logger.debug("Input Spectra : " + spectraID);
             } else {
                 System.out.println("InputSpectra is not auto-resolving or does not contain a SpectraData reference.");
                 assertNull(iSpectra.getSpectraData());
@@ -180,7 +180,7 @@ public class AnalysisCollectionTest extends TestCase {
                 Iterator<SpectrumIdentificationResult> sr  = spl.getSpectrumIdentificationResult().iterator();
                 assertTrue(sr.hasNext());
                 String identResultSpectraID = sr.next().getSpectrumID();
-                log.debug("SpectrumIdentificationResult Id : " + identResultSpectraID);
+                logger.debug("SpectrumIdentificationResult Id : " + identResultSpectraID);
                 assertNotNull(identResultSpectraID);
             } else {
                 System.out.println("SpectrumIdentification is not auto-resolving or does not contain a SpectrumIdentificationList reference.");

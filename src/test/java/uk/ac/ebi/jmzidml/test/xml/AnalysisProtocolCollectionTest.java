@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisProtocolCollection;
 import uk.ac.ebi.jmzidml.model.mzidml.Enzyme;
@@ -20,7 +20,7 @@ import java.util.Iterator;
 public class AnalysisProtocolCollectionTest extends TestCase {
 
 
-    private static final Logger log = Logger.getLogger(AnalysisProtocolCollectionTest.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AnalysisProtocolCollectionTest.class);
 
 
     public void testAnalysisProtocolCollectionInformation() throws Exception {
@@ -48,11 +48,11 @@ public class AnalysisProtocolCollectionTest extends TestCase {
         assertNotNull("SpectrumIdentificationProtocol can not be null.", sip);
         Enzyme enzyme = sip.next().getEnzymes().getEnzyme().iterator().next();
         assertNotNull("Enzyme can not be null.", enzyme);
-        log.debug("Enzyme Id :" + enzyme.getId());
+        logger.debug("Enzyme Id :" + enzyme.getId());
         assertEquals("ENZ_0", enzyme.getId());
 
         String siteRegex = enzyme.getSiteRegexp();
-        log.debug("Enzyme SiteRegex: " + siteRegex);
+        logger.debug("Enzyme SiteRegex: " + siteRegex);
         assertNotNull(siteRegex);
 
     }

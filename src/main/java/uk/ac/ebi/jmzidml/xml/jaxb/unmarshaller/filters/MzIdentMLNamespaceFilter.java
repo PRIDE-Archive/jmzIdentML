@@ -5,7 +5,8 @@
 
 package uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -18,7 +19,7 @@ import uk.ac.ebi.jmzidml.model.utils.ModelConstants;
 public class MzIdentMLNamespaceFilter extends XMLFilterImpl {
 
 
-    private static final Logger logger = Logger.getLogger(MzIdentMLNamespaceFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(MzIdentMLNamespaceFilter.class);
 
     public MzIdentMLNamespaceFilter() {
         logger.debug("MzMLNamespaceFilter created. Remember to call setParent(XMLReader)");

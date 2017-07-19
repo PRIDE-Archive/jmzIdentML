@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
@@ -16,10 +16,10 @@ import java.util.List;
  */
 public class SequenceCollectionTest extends TestCase {
 
-    Logger log = Logger.getLogger(SequenceCollectionTest.class);
+    org.slf4j.Logger logger = LoggerFactory.getLogger(SequenceCollectionTest.class);
 
     public void testSequenceCollectionInformation() throws Exception {
-        log.info("testing <SequenceCollection> content.");
+        logger.info("testing <SequenceCollection> content.");
 
         URL xmlFileURL = SequenceCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
@@ -45,7 +45,7 @@ public class SequenceCollectionTest extends TestCase {
         if (MzIdentMLElement.DBSequence.isAutoRefResolving() && dbseq.getSearchDatabaseRef() != null) {
             assertNotNull(dbseq.getSearchDatabase());
             assertEquals("SwissProt", dbseq.getSearchDatabase().getName());
-            log.debug("DBSequence Acc:" + dbseq.getAccession()
+            logger.debug("DBSequence Acc:" + dbseq.getAccession()
                     + "Id:" + dbseq.getId()
                     + "Name:" + dbseq.getName()
                     + "Database name:" + dbseq.getSearchDatabase().getName()
@@ -59,7 +59,7 @@ public class SequenceCollectionTest extends TestCase {
 
         assertEquals(3, dbseq.getParamGroup().size());
         for (AbstractParam param : dbseq.getParamGroup()) {
-            log.debug("Param:" + param.getName()
+            logger.debug("Param:" + param.getName()
                     + " acc:" + param.getUnitAccession()
                     + " value:" + param.getValue()
                     + " unitCvRef:" + param.getUnitCvRef());

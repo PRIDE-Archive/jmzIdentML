@@ -1,6 +1,8 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.marshaller;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.model.utils.ModelConstants;
 import uk.ac.ebi.jmzidml.xml.Constants;
 import uk.ac.ebi.jmzidml.xml.jaxb.marshaller.listeners.ObjectClassListener;
@@ -16,7 +18,7 @@ import javax.xml.bind.Marshaller;
  */
 public class MarshallerFactory {
 
-    private static final Logger logger = Logger.getLogger(MarshallerFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(MarshallerFactory.class);
     private static MarshallerFactory instance = new MarshallerFactory();
     private static JAXBContext jc = null;
 

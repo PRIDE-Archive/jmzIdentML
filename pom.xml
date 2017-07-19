@@ -37,22 +37,11 @@
     <properties>
         <uk.ac.ebi.pride.architectural.pride-logging.version>1.0.0</uk.ac.ebi.pride.architectural.pride-logging.version>
         <uk.ac.ebi.pride.architectural.pride-tdd.version>1.0.3</uk.ac.ebi.pride.architectural.pride-tdd.version>
-        <psidev.psi.tools-xxindex.version>0.21</psidev.psi.tools-xxindex.version>
+        <uk.ac.ebi.pride.architectural.pride-xml-handling.version>1.0.1-SNAPSHOT</uk.ac.ebi.pride.architectural.pride-xml-handling.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-        <!-- Logging, from PRIDE, is included here, but this project needs log4j, and pride-logging combines slf4j with
-                logback, which is supposed to be more modern. A discussion should take place here about whether or not a
-                particular slf4j backend should be included in pride-logging. From my (mbernal) point of view, it makes sense
-                that, from pride architectural packages we try to push for certain technologies, giving the client artifact the
-                freedom to not use them and opt for a different one, like in this case, where instead of using logback, this
-                artifact is using log4j -->
         <dependency>
             <groupId>uk.ac.ebi.pride.architectural</groupId>
             <artifactId>pride-logging</artifactId>
@@ -67,27 +56,12 @@
             <type>pom</type>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.codehaus.woodstox</groupId>
-            <artifactId>woodstox-core-asl</artifactId>
-            <version>4.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-xjc</artifactId>
-            <version>2.2.7</version>
-        </dependency>
-        <dependency>
-            <groupId>psidev.psi.tools</groupId>
-            <artifactId>xxindex</artifactId>
-            <version>${psidev.psi.tools-xxindex.version}</version>
-        </dependency>
 
-        <!-- needed for EscapingXMLStreamWriter to cope with ASCII control characters that are not properly escaped in JAXB -->
         <dependency>
-            <groupId>it.unimi.dsi</groupId>
-            <artifactId>fastutil</artifactId>
-            <version>6.5.1</version>
+            <groupId>uk.ac.ebi.pride.architectural</groupId>
+            <artifactId>pride-xml-handling</artifactId>
+            <version>${uk.ac.ebi.pride.architectural.pride-xml-handling.version}</version>
+            <type>pom</type>
         </dependency>
 
     </dependencies>

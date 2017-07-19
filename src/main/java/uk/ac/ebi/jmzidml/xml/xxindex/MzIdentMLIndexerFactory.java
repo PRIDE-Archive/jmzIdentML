@@ -1,6 +1,8 @@
 package uk.ac.ebi.jmzidml.xml.xxindex;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import psidev.psi.tools.xxindex.SimpleXmlElementExtractor;
 import psidev.psi.tools.xxindex.StandardXpathAccess;
 import psidev.psi.tools.xxindex.XmlElementExtractor;
@@ -26,7 +28,7 @@ import java.util.regex.Pattern;
 
 public class MzIdentMLIndexerFactory {
 
-    private static final Logger logger = Logger.getLogger(MzIdentMLIndexerFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(MzIdentMLIndexerFactory.class);
 
     private static final MzIdentMLIndexerFactory instance = new MzIdentMLIndexerFactory();
     private static final Pattern ID_PATTERN = Pattern.compile("\\sid\\s*=\\s*['\"]([^'\"]*)['\"]", Pattern.CASE_INSENSITIVE);

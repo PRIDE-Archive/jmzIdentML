@@ -1,6 +1,6 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.listeners;
 
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.ParamListMappings;
 import uk.ac.ebi.jmzidml.ParamMappings;
@@ -29,7 +29,7 @@ import java.lang.reflect.Method;
  */
 public class RawXMLListener extends Unmarshaller.Listener {
 
-    private static final Logger log = Logger.getLogger(RawXMLListener.class);
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(RawXMLListener.class);
     private final MzIdentMLIndexer index;
     private final MzIdentMLObjectCache cache;
 

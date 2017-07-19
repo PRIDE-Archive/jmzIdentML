@@ -1,6 +1,7 @@
 package uk.ac.ebi.jmzidml;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
@@ -1089,7 +1090,7 @@ public enum MzIdentMLElement {
      */
     public static void loadProperties() {
 
-        Logger logger = Logger.getLogger(MzIdentMLElement.class);
+        org.slf4j.Logger logger = LoggerFactory.getLogger(MzIdentMLElement.class);
 
         //check to see if we have a project-specific configuration file
         URL xmlFileURL = MzIdentMLElement.class.getClassLoader().getResource("MzIdentMLElement.cfg.xml");

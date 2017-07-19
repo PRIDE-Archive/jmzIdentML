@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class AuditCollectionTest extends TestCase {
 
-    Logger log = Logger.getLogger(AuditCollectionTest.class);
+    org.slf4j.Logger logger = LoggerFactory.getLogger(AuditCollectionTest.class);
 
     public void testAuditCollectionInformation() throws Exception {
 

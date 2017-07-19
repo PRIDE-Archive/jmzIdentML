@@ -1,6 +1,7 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
@@ -29,7 +30,7 @@ import java.io.StringReader;
  */
 public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> extends Unmarshaller.Listener {
 
-    private static final Logger log = Logger.getLogger(AbstractReferenceResolver.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AbstractReferenceResolver.class);
 
     // ToDo: check if we need the cache here or if we can handle this from another level (e.g. the MzIdentMLUnmarshaller)
     private MzIdentMLIndexer index = null;
@@ -53,13 +54,13 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
         // if the referenced object/element is not yet in the cache (or no cache
         // is available) create it from the XML using the index and ID maps
 
-        log.debug("AbstractReferenceResolver.unmarshal for id: " + refId);
+        logger.debug("AbstractReferenceResolver.unmarshal for id: " + refId);
         // first retrieve the XML snippet representing the referenced object/element
         String xml;
         // special case for ContactRole.class as we can either have a Person.class or a Organisation.class
 
         if (cls == AbstractContact.class) {
-            log.debug("SPECIAL CASE: ContactRole");
+            logger.debug("SPECIAL CASE: ContactRole");
             // see if the ID fits a Person
             String personXML = index.getXmlString(refId, Person.class);
             // see if the ID fits an Organisation
@@ -81,7 +82,7 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
             // required for the addition of namespaces to top-level objects
             MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
 
-            // initializeUnmarshaller will assign the proper reader to the xmlFilter
+            // initializeUnmarshaller will assign the proper expressionatlas to the xmlFilter
             Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
 
             // need to do it this way because snippet does not have a XmlRootElement annotation
@@ -103,7 +104,7 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
 //                }
 
         } catch (JAXBException e) {
-            log.error("AbstractReferenceResolver.unmarshal", e);
+            logger.error("AbstractReferenceResolver.unmarshal", e);
             throw new IllegalStateException("Could not unmarshall refId: " + refId + " for element type: " + cls);
         }
 
