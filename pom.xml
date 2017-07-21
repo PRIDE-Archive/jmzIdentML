@@ -35,9 +35,9 @@
     </developers>
 
     <properties>
-        <uk.ac.ebi.pride.architectural.pride-logging.version>1.0.0</uk.ac.ebi.pride.architectural.pride-logging.version>
-        <uk.ac.ebi.pride.architectural.pride-tdd.version>1.0.3</uk.ac.ebi.pride.architectural.pride-tdd.version>
-        <uk.ac.ebi.pride.architectural.pride-xml-handling.version>1.0.1</uk.ac.ebi.pride.architectural.pride-xml-handling.version>
+        <uk.ac.ebi.pride.architectural-pride-logging.version>1.0.0</uk.ac.ebi.pride.architectural-pride-logging.version>
+        <uk.ac.ebi.pride.architectural-pride-tdd.version>1.0.3</uk.ac.ebi.pride.architectural-pride-tdd.version>
+        <uk.ac.ebi.pride.architectural-pride-xml-handling.version>1.0.1</uk.ac.ebi.pride.architectural-pride-xml-handling.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -45,14 +45,14 @@
         <dependency>
             <groupId>uk.ac.ebi.pride.architectural</groupId>
             <artifactId>pride-logging</artifactId>
-            <version>${uk.ac.ebi.pride.architectural.pride-logging.version}</version>
+            <version>${uk.ac.ebi.pride.architectural-pride-logging.version}</version>
             <type>pom</type>
         </dependency>
         <!-- TDD -->
         <dependency>
             <groupId>uk.ac.ebi.pride.architectural</groupId>
             <artifactId>pride-tdd</artifactId>
-            <version>${uk.ac.ebi.pride.architectural.pride-tdd.version}</version>
+            <version>${uk.ac.ebi.pride.architectural-pride-tdd.version}</version>
             <type>pom</type>
             <scope>test</scope>
         </dependency>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>uk.ac.ebi.pride.architectural</groupId>
             <artifactId>pride-xml-handling</artifactId>
-            <version>${uk.ac.ebi.pride.architectural.pride-xml-handling.version}</version>
+            <version>${uk.ac.ebi.pride.architectural-pride-xml-handling.version}</version>
             <type>pom</type>
         </dependency>
 
