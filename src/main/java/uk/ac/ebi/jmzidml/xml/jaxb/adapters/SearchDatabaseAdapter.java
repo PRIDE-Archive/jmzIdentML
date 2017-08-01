@@ -1,6 +1,7 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.adapters;
 
 import uk.ac.ebi.jmzidml.model.mzidml.SearchDatabase;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.Constants;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
@@ -12,8 +13,8 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  */
 public class SearchDatabaseAdapter extends AbstractResolvingAdapter<String, SearchDatabase> {
 
-    public SearchDatabaseAdapter(MzIdentMLIndexer index, AdapterObjectCache cache) {
-        super(index, cache);
+    public SearchDatabaseAdapter(MzIdentMLIndexer index, AdapterObjectCache cache, MzIdentMLVersion version) {
+        super(index, cache, version);
     }
 
     public SearchDatabase unmarshal(String refId) {

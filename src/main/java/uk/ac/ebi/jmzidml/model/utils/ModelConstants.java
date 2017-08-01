@@ -25,10 +25,11 @@ package uk.ac.ebi.jmzidml.model.utils;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.MzIdentML;
 
-import javax.xml.namespace.QName;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.namespace.QName;
 
 /**
  * @author Richard Cote
@@ -43,6 +44,12 @@ public class ModelConstants {
     public static final String MZIDML_NS = "http://psidev.info/psi/pi/mzIdentML/1.1";
     public static final String MZIDML_VERSION = "1.1.0";
     public static final String MZIDML_SCHEMA = "http://www.psidev.info/files/mzIdentML1.1.0.xsd";
+    public static final String MZIDML_NS_1_1 = "http://psidev.info/psi/pi/mzIdentML/1.1";
+    public static final String MZIDML_VERSION_1_1 = "1.1.0";
+    public static final String MZIDML_SCHEMA_1_1 = "http://www.psidev.info/files/mzIdentML1.1.0.xsd";
+    public static final String MZIDML_NS_1_2 = "http://psidev.info/psi/pi/mzIdentML/1.2";
+    public static final String MZIDML_VERSION_1_2 = "1.2.0";
+    public static final String MZIDML_SCHEMA_1_2 = "http://www.psidev.info/files/mzIdentML1.2.0.xsd";
 
     private static Map<Class, QName> modelQNames = new HashMap<Class, QName>();
 

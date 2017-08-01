@@ -5,6 +5,7 @@
 
 package uk.ac.ebi.jmzidml.xml.jaxb.adapters;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectraData;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.Constants;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
@@ -15,8 +16,8 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  */
 public class SpectraDataAdapter extends AbstractResolvingAdapter<String, SpectraData> {
 
-    public SpectraDataAdapter(MzIdentMLIndexer index, AdapterObjectCache cache) {
-        super(index, cache);
+    public SpectraDataAdapter(MzIdentMLIndexer index, AdapterObjectCache cache, MzIdentMLVersion version) {
+        super(index, cache, version);
     }
 
     public SpectraData unmarshal(String refId) {

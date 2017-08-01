@@ -22,9 +22,12 @@
 
 package uk.ac.ebi.jmzidml.xml.jaxb.adapters;
 
+import java.io.StringReader;
+
 import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.Constants;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
@@ -36,7 +39,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.transform.sax.SAXSource;
-import java.io.StringReader;
+
+
 
 
 public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends XmlAdapter<ValueType, BoundType> {
@@ -46,6 +50,7 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
     protected MzIdentMLIndexer index = null;
     protected AdapterObjectCache cache = null;
     protected boolean useSpectrumCache = true;
+    protected MzIdentMLVersion version = MzIdentMLVersion.Version_1_1; //default mzIdentML version is 1.1
 
     /**
      * the presence of a constructor forces all subclasses to provide a valid indexer
@@ -54,13 +59,14 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
      *
      * @param index
      */
-    protected AbstractResolvingAdapter(MzIdentMLIndexer index, AdapterObjectCache cache) {
-        this(index, cache, true);
+    protected AbstractResolvingAdapter(MzIdentMLIndexer index, AdapterObjectCache cache, MzIdentMLVersion version) {
+        this(index, cache, version, true);
     }
 
-    protected AbstractResolvingAdapter(MzIdentMLIndexer index, AdapterObjectCache cache, boolean aUseSpectrumCache) {
+    protected AbstractResolvingAdapter(MzIdentMLIndexer index, AdapterObjectCache cache, MzIdentMLVersion version, boolean aUseSpectrumCache) {
         this.index = index;
         this.cache = cache;
+        this.version = version;
         this.useSpectrumCache = aUseSpectrumCache;
     }
 
@@ -156,7 +162,7 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
             // ToDo: why not use the MzIdentMLUnmarshaller ?? -> internal state conflicts if trying to use one MzIdentMLUnmarshaller
 
             //required for the addition of namespaces to top-level objects
-            MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
+            MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter(version);
             //initializeUnmarshaller will assign the proper reader to the xmlFilter
             //this also propagates the cache so that any associated IDREF calls
             //are handled efficiently if possible

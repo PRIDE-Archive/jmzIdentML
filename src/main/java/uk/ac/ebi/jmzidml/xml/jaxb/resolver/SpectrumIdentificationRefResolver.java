@@ -4,6 +4,7 @@ import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentification;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationList;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationProtocol;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
@@ -14,8 +15,8 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  */
 public class SpectrumIdentificationRefResolver extends AbstractReferenceResolver<SpectrumIdentification> {
 
-    public SpectrumIdentificationRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
-        super(index, cache);
+    public SpectrumIdentificationRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLVersion version) {
+        super(index, cache, version);
     }
 
     @Override

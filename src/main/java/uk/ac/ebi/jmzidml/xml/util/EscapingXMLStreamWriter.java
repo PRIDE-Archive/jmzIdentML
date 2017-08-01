@@ -4,6 +4,8 @@ import javax.xml.namespace.NamespaceContext;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
+
 /**
  * Delegating {@link javax.xml.stream.XMLStreamWriter} that filters out UTF-8 characters that
  * are illegal in XML.
@@ -16,8 +18,9 @@ public class EscapingXMLStreamWriter implements XMLStreamWriter {
 
     private final XMLStreamWriter writer;
     private String charEncoding;
+    private MzIdentMLVersion version;
 
-    public EscapingXMLStreamWriter(XMLStreamWriter writer) {
+    public EscapingXMLStreamWriter(XMLStreamWriter writer, MzIdentMLVersion version) {
 
         if (null == writer) {
             throw new IllegalArgumentException("null");
@@ -25,39 +28,40 @@ public class EscapingXMLStreamWriter implements XMLStreamWriter {
             this.writer = writer;
         }
         this.charEncoding = "UTF-8";
+        this.version = version;
     }
 
-    public EscapingXMLStreamWriter(XMLStreamWriter writer, String encoding) {
-        this(writer);
+    public EscapingXMLStreamWriter(XMLStreamWriter writer, MzIdentMLVersion version, String encoding) {
+        this(writer, version);
         if (encoding != null) {
             this.charEncoding = encoding;
         }
     }
 
-    public void writeStartElement(String s) throws XMLStreamException {
-        writer.writeStartElement(s);
+    public void writeStartElement(String localName) throws XMLStreamException {
+        writer.writeStartElement(localName);
     }
 
-    public void writeStartElement(String s, String s1) throws XMLStreamException {
-        writer.writeStartElement(s, s1);
+    public void writeStartElement(String namespaceURI, String localName) throws XMLStreamException {
+        writer.writeStartElement(version.getNameSpace(), localName);
     }
 
-    public void writeStartElement(String s, String s1, String s2)
+    public void writeStartElement(String prefix, String localName, String namespaceURI)
             throws XMLStreamException {
-        writer.writeStartElement(s, s1, s2);
+        writer.writeStartElement("", localName, version.getNameSpace());
     }
 
-    public void writeEmptyElement(String s, String s1) throws XMLStreamException {
-        writer.writeEmptyElement(s, s1);
+    public void writeEmptyElement(String namesapceURI, String localName) throws XMLStreamException {
+        writer.writeEmptyElement(version.getNameSpace(), localName);
     }
 
-    public void writeEmptyElement(String s, String s1, String s2)
+    public void writeEmptyElement(String prefix, String localName, String namesapceURI)
             throws XMLStreamException {
-        writer.writeEmptyElement(s, s1, s2);
+        writer.writeEmptyElement("", localName, version.getNameSpace());
     }
 
-    public void writeEmptyElement(String s) throws XMLStreamException {
-        writer.writeEmptyElement(s);
+    public void writeEmptyElement(String localName) throws XMLStreamException {
+        writer.writeEmptyElement(localName);
     }
 
     public void writeEndElement() throws XMLStreamException {
@@ -82,20 +86,20 @@ public class EscapingXMLStreamWriter implements XMLStreamWriter {
 
     public void writeAttribute(String prefix, String namespaceUri, String localName, String value)
             throws XMLStreamException {
-        writer.writeAttribute(prefix, namespaceUri, localName, EscapingXMLUtilities.escapeCharacters(value));
+        writer.writeAttribute("", version.getNameSpace(), localName, EscapingXMLUtilities.escapeCharacters(value));
     }
 
     public void writeAttribute(String namespaceUri, String localName, String value)
             throws XMLStreamException {
-        writer.writeAttribute(namespaceUri, localName, EscapingXMLUtilities.escapeCharacters(value));
+        writer.writeAttribute(version.getNameSpace(), localName, EscapingXMLUtilities.escapeCharacters(value));
     }
 
-    public void writeNamespace(String s, String s1) throws XMLStreamException {
-        writer.writeNamespace(s, s1);
+    public void writeNamespace(String prefix, String namespaceURI) throws XMLStreamException {
+        writer.writeNamespace("", version.getNameSpace());
     }
 
-    public void writeDefaultNamespace(String s) throws XMLStreamException {
-        writer.writeDefaultNamespace(s);
+    public void writeDefaultNamespace(String namespaceURI) throws XMLStreamException {
+        writer.writeDefaultNamespace(version.getNameSpace());
     }
 
     public void writeComment(String s) throws XMLStreamException {
@@ -145,21 +149,21 @@ public class EscapingXMLStreamWriter implements XMLStreamWriter {
         writer.writeCharacters(EscapingXMLUtilities.escapeCharacters(new String(chars, start, len)));
     }
 
-    public String getPrefix(String s) throws XMLStreamException {
-        return writer.getPrefix(s);
+    public String getPrefix(String uri) throws XMLStreamException {
+        return writer.getPrefix(uri);
     }
 
-    public void setPrefix(String s, String s1) throws XMLStreamException {
-        writer.setPrefix(s, s1);
+    public void setPrefix(String prefix, String uri) throws XMLStreamException {
+        writer.setPrefix(prefix, uri);
     }
 
     public void setDefaultNamespace(String s) throws XMLStreamException {
-        writer.setDefaultNamespace(s);
+        writer.setDefaultNamespace(version.getNameSpace());
     }
 
     public void setNamespaceContext(NamespaceContext namespaceContext)
             throws XMLStreamException {
-        writer.setNamespaceContext(namespaceContext);
+        writer.setNamespaceContext(namespaceContext);        
     }
 
     public NamespaceContext getNamespaceContext() {
