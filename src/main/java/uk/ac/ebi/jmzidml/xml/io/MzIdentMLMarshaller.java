@@ -226,7 +226,7 @@ public class MzIdentMLMarshaller {
         // tag opening plus id attribute
         sb.append("<MzIdentML id=\"").append(id).append("\"");
         // further attributes
-        sb.append(" version=\"").append(version.getVersion()).append("\"");
+        sb.append(" version=\"").append(version.getVersionString()).append("\"");
         sb.append(" xmlns=\"").append(version.getNameSpace()).append("\"");
         sb.append(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"");
         sb.append(" xsi:schemaLocation=\"").append(version.getNameSpace()).append(" ").append(version.getSchema()).append("\"");

@@ -7,8 +7,6 @@
 
 package uk.ac.ebi.jmzidml.model.utils;
 
-import static uk.ac.ebi.jmzidml.model.utils.ModelConstants.MZIDML_NS;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +54,7 @@ public enum MzIdentMLVersion {
         return this.MZIDML_NS;
     }
 
-    public String getVersion() {
+    public String getVersionString() {
         return this.MZIDML_VERSION;
     }
 
@@ -93,6 +91,25 @@ public enum MzIdentMLVersion {
             }
         }
         return null;
+    }
+    
+    /**
+     * Get MzIdentMLVersion object from input string.
+     * Valid input string are "1.1" and "1.2",
+     * other input string will result in NULL.
+     *
+     * @param ver version string
+     *
+     * @return MzIdentMLVersion
+     */
+    public static MzIdentMLVersion getVersion(final String ver) {
+        if (ver.equals("1.1")) {
+            return Version_1_1;
+        } else if (ver.equals("1.2")) {
+            return Version_1_2;
+        } else {
+            return null;
+        }
     }
 
 }
