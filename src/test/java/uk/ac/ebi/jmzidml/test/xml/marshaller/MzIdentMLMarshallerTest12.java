@@ -240,7 +240,7 @@ public class MzIdentMLMarshallerTest12 {
         
         MzIdentMLMarshaller marshaller = new MzIdentMLMarshaller(MzIdentMLVersion.Version_1_2);
         File outputFile = File.createTempFile("output2", ".xml");
-        marshaller.marshal(mzIdentML, new FileOutputStream(new File("output2.xml")));
+        marshaller.marshal(mzIdentML, new FileOutputStream(outputFile));
         outputFile.deleteOnExit();
 
     }
