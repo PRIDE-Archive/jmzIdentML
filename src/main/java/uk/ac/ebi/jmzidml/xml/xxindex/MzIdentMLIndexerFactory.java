@@ -355,19 +355,25 @@ public class MzIdentMLIndexerFactory {
             }
         }
 
+        /**
+         * Validate and Extract Id from the XML elements
+         * @param xml MzIdentML type XML section
+         * @return String value of the ID attribute
+         */
         private String getIdFromRawXML(String xml) {
-            Matcher match = ID_PATTERN.matcher(xml);
+            String id = null;
 
-            // ToDo: more checks: if no id found or more than one match, ...
-            if (match.find()) {
-                return match.group(1).intern();
-            } else {
-                throw new IllegalStateException("Invalid ID in xml: " + xml);
+            if(xml != null && xml != ""){
+                Matcher match = ID_PATTERN.matcher(xml);
+
+                // ToDo: more checks: if no id found or more than one match, ...
+                if (match.find()) {
+                    id = match.group(1).intern();
+                } else {
+                    throw new IllegalStateException("Invalid ID in xml: " + xml);
+                }
             }
+            return id;
         }
-
-
-
     }
-
 }
