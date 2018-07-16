@@ -37,7 +37,7 @@
     <properties>
         <uk.ac.ebi.pride.architectural.pride-logging.version>1.0.0</uk.ac.ebi.pride.architectural.pride-logging.version>
         <uk.ac.ebi.pride.architectural.pride-tdd.version>1.0.3</uk.ac.ebi.pride.architectural.pride-tdd.version>
-        <psidev.psi.tools-xxindex.version>0.20</psidev.psi.tools-xxindex.version>
+        <psidev.psi.tools-xxindex.version>0.21</psidev.psi.tools-xxindex.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -159,6 +159,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>

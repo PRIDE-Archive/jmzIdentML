@@ -3,6 +3,7 @@ package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideHypothesis;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
@@ -13,8 +14,8 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  */
 public class PeptideHypothesisRefResolver extends AbstractReferenceResolver<PeptideHypothesis> {
 
-    public PeptideHypothesisRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
-        super(index, cache);
+    public PeptideHypothesisRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLVersion version) {
+        super(index, cache, version);
     }
 
     @Override

@@ -1,9 +1,27 @@
 package uk.ac.ebi.jmzidml.xml.xxindex;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.naming.ConfigurationException;
+
 import org.apache.log4j.Logger;
-import psidev.psi.tools.xxindex.SimpleXmlElementExtractor;
+
+import psidev.psi.tools.xxindex.FastXmlElementExtractor;
 import psidev.psi.tools.xxindex.StandardXpathAccess;
-import psidev.psi.tools.xxindex.XmlElementExtractor;
 import psidev.psi.tools.xxindex.XpathAccess;
 import psidev.psi.tools.xxindex.index.IndexElement;
 import psidev.psi.tools.xxindex.index.XpathIndex;
@@ -11,17 +29,6 @@ import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.mzidml.Identifiable;
 import uk.ac.ebi.jmzidml.xml.Constants;
-
-import javax.naming.ConfigurationException;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class MzIdentMLIndexerFactory {
@@ -61,7 +68,7 @@ public class MzIdentMLIndexerFactory {
         private boolean inMemory = false;
         private byte[] xmlFileBuffer;
         private XpathAccess xpathAccess = null;
-        private XmlElementExtractor xmlExtractor = null;
+        private FastXmlElementExtractor xmlExtractor = null;
         private MemoryMappedXmlElementExtractor memoryMappedXmlElementExtractor;
         private XpathIndex index = null;
         private String mzIdentMLAttributeXMLString = null;
@@ -120,7 +127,7 @@ public class MzIdentMLIndexerFactory {
                 xpathAccess = memoryMappedStandardXpathAccess;
             } else {
                 xpathAccess = new StandardXpathAccess(xmlFile, xpaths);
-                xmlExtractor = new SimpleXmlElementExtractor();
+                xmlExtractor = new FastXmlElementExtractor(xmlFile);
                 xmlExtractor.setEncoding(xmlExtractor.detectFileEncoding(xmlFile.toURI().toURL()));
             }
         }

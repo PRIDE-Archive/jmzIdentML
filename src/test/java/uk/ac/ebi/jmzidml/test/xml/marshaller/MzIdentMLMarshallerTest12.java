@@ -4,13 +4,8 @@ import org.junit.Test;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
-import uk.ac.ebi.jmzidml.model.utils.ModelConstants;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLMarshaller;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,6 +15,8 @@ import java.util.Iterator;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
+
+import java.io.FileOutputStream;
 
 import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 
@@ -34,7 +31,7 @@ import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
  * @since 1.0
  */
 @SuppressWarnings("unused")
-public class MzIdentMLMarshallerTest {
+public class MzIdentMLMarshallerTest12 {
 
 
     @Test
@@ -44,18 +41,19 @@ public class MzIdentMLMarshallerTest {
         int auditCount = -1;
         int dbSequenceCount = -1;
         int peptideEvidencePeptideCount = -1;
-        URL xmlFileURL = MzIdentMLMarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        URL xmlFileURL = MzIdentMLMarshallerTest12.class.getClassLoader().getResource("Mascot_MSMS_example_1.2.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
 
-        MzIdentMLMarshaller m = new MzIdentMLMarshaller();
+        MzIdentMLMarshaller m = new MzIdentMLMarshaller(MzIdentMLVersion.Version_1_2);
         assertNotNull(m);
         File outputFile =  File.createTempFile("output", ".xml");
         FileWriter writer = null;
         try {
-            writer = new FileWriter(outputFile);
 
+            writer = new FileWriter(outputFile);
+            
             // mzIdentML
             //     cvList
             //     AnalysisSoftwareList
@@ -210,7 +208,7 @@ public class MzIdentMLMarshallerTest {
 
     @Test(expected= IllegalArgumentException.class)
     public void testMarshallEmptyAuditCollection() throws Exception{
-        URL xmlFileURL = MzIdentMLMarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        URL xmlFileURL = MzIdentMLMarshallerTest12.class.getClassLoader().getResource("Mascot_MSMS_example_1.2.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
@@ -223,7 +221,7 @@ public class MzIdentMLMarshallerTest {
 
     @Test(expected= IllegalArgumentException.class)
     public void testMarshallEmptyCvList() throws Exception{
-        URL xmlFileURL = MzIdentMLMarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        URL xmlFileURL = MzIdentMLMarshallerTest12.class.getClassLoader().getResource("Mascot_MSMS_example_1.2.mzid");
         assertNotNull(xmlFileURL);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
         assertNotNull(unmarshaller);
@@ -235,18 +233,16 @@ public class MzIdentMLMarshallerTest {
 
     @Test
     public void testMarshall() throws  Exception{
-        URL xmlFileURL = MzIdentMLMarshallerTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        URL xmlFileURL = MzIdentMLMarshallerTest12.class.getClassLoader().getResource("Mascot_MSMS_example_1.2.mzid");
 
-        // Lazy caching of the JAXB Context.
-        JAXBContext jc = JAXBContext.newInstance(ModelConstants.PACKAGE);
-        //create unmarshaller
-        Unmarshaller unmarshaller = jc.createUnmarshaller();
-        Object object = unmarshaller.unmarshal(xmlFileURL);
-        File outputFile =  File.createTempFile("output2", ".xml");
-        Marshaller marshaller = jc.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        marshaller.marshal(object,outputFile);
+        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL);
+        MzIdentML mzIdentML = unmarshaller.unmarshal(MzIdentMLElement.MzIdentML);
+        
+        MzIdentMLMarshaller marshaller = new MzIdentMLMarshaller(MzIdentMLVersion.Version_1_2);
+        File outputFile = File.createTempFile("output2", ".xml");
+        marshaller.marshal(mzIdentML, new FileOutputStream(outputFile));
         outputFile.deleteOnExit();
+
     }
 
 

@@ -5,6 +5,7 @@ import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
 import uk.ac.ebi.jmzidml.model.mzidml.Peptide;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 import uk.ac.ebi.jmzidml.model.mzidml.TranslationTable;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
@@ -15,8 +16,8 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  */
 public class PeptideEvidenceResolver extends AbstractReferenceResolver<PeptideEvidence> {
 
-    public PeptideEvidenceResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
-        super(index, cache);
+    public PeptideEvidenceResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLVersion version) {
+        super(index, cache, version);
     }
 
     @Override

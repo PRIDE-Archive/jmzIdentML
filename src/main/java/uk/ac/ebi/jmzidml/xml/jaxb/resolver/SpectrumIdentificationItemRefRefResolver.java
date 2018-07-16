@@ -3,6 +3,7 @@ package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItemRef;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
@@ -12,8 +13,8 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  */
 public class SpectrumIdentificationItemRefRefResolver extends AbstractReferenceResolver<SpectrumIdentificationItemRef> {
 
-    public SpectrumIdentificationItemRefRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
-        super(index, cache);
+    public SpectrumIdentificationItemRefRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLVersion version) {
+        super(index, cache, version);
     }
 
     @Override

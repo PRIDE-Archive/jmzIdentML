@@ -2,21 +2,25 @@ package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 
 import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
+
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.mzidml.AbstractContact;
 import uk.ac.ebi.jmzidml.model.mzidml.Organization;
 import uk.ac.ebi.jmzidml.model.mzidml.Person;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters.MzIdentMLNamespaceFilter;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
+
+import java.io.StringReader;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.sax.SAXSource;
-import java.io.StringReader;
 
 /**
  * Abstract base class for the reference resolver classes.
@@ -34,11 +38,12 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
     // ToDo: check if we need the cache here or if we can handle this from another level (e.g. the MzIdentMLUnmarshaller)
     private MzIdentMLIndexer index = null;
     private MzIdentMLObjectCache cache = null;
+    private MzIdentMLVersion version = MzIdentMLVersion.Version_1_1; //default mzIdetnML version is 1.1
 
-
-    protected AbstractReferenceResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
+    protected AbstractReferenceResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLVersion version) {
         this.index = index;
         this.cache = cache;
+        this.version = version;
     }
 
 
@@ -79,7 +84,7 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
 
         try {
             // required for the addition of namespaces to top-level objects
-            MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
+            MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter(version);
 
             // initializeUnmarshaller will assign the proper reader to the xmlFilter
             Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);

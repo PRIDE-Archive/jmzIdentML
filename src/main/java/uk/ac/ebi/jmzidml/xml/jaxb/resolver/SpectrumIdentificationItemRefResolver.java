@@ -5,6 +5,7 @@ import uk.ac.ebi.jmzidml.model.mzidml.MassTable;
 import uk.ac.ebi.jmzidml.model.mzidml.Peptide;
 import uk.ac.ebi.jmzidml.model.mzidml.Sample;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
@@ -15,8 +16,8 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  */
 public class SpectrumIdentificationItemRefResolver extends AbstractReferenceResolver<SpectrumIdentificationItem> {
 
-    public SpectrumIdentificationItemRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
-        super(index, cache);
+    public SpectrumIdentificationItemRefResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLVersion version) {
+        super(index, cache, version);
     }
 
     @Override
