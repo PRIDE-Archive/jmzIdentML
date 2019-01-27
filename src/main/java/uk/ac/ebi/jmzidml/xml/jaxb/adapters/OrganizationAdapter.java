@@ -1,6 +1,7 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.adapters;
 
 import uk.ac.ebi.jmzidml.model.mzidml.Organization;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.Constants;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
@@ -12,8 +13,8 @@ import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
  */
 public class OrganizationAdapter extends AbstractResolvingAdapter<String, Organization> {
 
-    public OrganizationAdapter(MzIdentMLIndexer index, AdapterObjectCache cache) {
-        super(index, cache);
+    public OrganizationAdapter(MzIdentMLIndexer index, AdapterObjectCache cache, MzIdentMLVersion version) {
+        super(index, cache, version);
     }
 
     public Organization unmarshal(String refId) {

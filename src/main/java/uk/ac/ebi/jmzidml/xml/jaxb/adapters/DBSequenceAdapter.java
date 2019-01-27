@@ -5,14 +5,15 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.adapters;
 
 import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.Constants;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.cache.AdapterObjectCache;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
 public class DBSequenceAdapter extends AbstractResolvingAdapter<String, DBSequence> {
 
-    public DBSequenceAdapter(MzIdentMLIndexer index, AdapterObjectCache cache) {
-        super(index, cache);
+    public DBSequenceAdapter(MzIdentMLIndexer index, AdapterObjectCache cache, MzIdentMLVersion version) {
+        super(index, cache, version);
     }
 
     public DBSequence unmarshal(String refId) {
