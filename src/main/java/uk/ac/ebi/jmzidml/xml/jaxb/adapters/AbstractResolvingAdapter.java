@@ -23,8 +23,8 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.adapters;
 
 import java.io.StringReader;
-
 import org.apache.log4j.Logger;
+
 import org.xml.sax.InputSource;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
@@ -45,7 +45,7 @@ import javax.xml.transform.sax.SAXSource;
 
 public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends XmlAdapter<ValueType, BoundType> {
 
-    protected static final Logger logger = Logger.getLogger(AbstractResolvingAdapter.class);
+    protected static final Logger logger = LoggerFactory.getLogger(AbstractResolvingAdapter.class);
 
     protected MzIdentMLIndexer index = null;
     protected AdapterObjectCache cache = null;
@@ -162,8 +162,13 @@ public abstract class AbstractResolvingAdapter<ValueType, BoundType> extends Xml
             // ToDo: why not use the MzIdentMLUnmarshaller ?? -> internal state conflicts if trying to use one MzIdentMLUnmarshaller
 
             //required for the addition of namespaces to top-level objects
+
             MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter(version);
             //initializeUnmarshaller will assign the proper reader to the xmlFilter
+
+            //MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
+            //initializeUnmarshaller will assign the proper expressionatlas to the xmlFilter
+
             //this also propagates the cache so that any associated IDREF calls
             //are handled efficiently if possible
             Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);

@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.Cv;
 import uk.ac.ebi.jmzidml.model.mzidml.CvList;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CvListTest extends TestCase {
 
-    Logger log = Logger.getLogger(CvListTest.class);
+    org.slf4j.Logger logger = LoggerFactory.getLogger(CvListTest.class);
 
 
     public void testCvListInformation() throws Exception {
@@ -29,7 +29,7 @@ public class CvListTest extends TestCase {
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, true);
         assertNotNull(unmarshaller);
 
-        log.debug("Checking CvList element.");
+        logger.debug("Checking CvList element.");
         // Number of providers
         int totalCv = unmarshaller.getObjectCountForXpath(MzIdentMLElement.CvList.getXpath());
         assertEquals(1,totalCv);

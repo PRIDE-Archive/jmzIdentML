@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.AbstractContact;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSampleCollection;
@@ -18,7 +18,7 @@ import java.net.URL;
  */
 public class AnalysisSampleCollectionTest extends TestCase {
 
-    private static final Logger log = Logger.getLogger(AnalysisSampleCollectionTest.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AnalysisSampleCollectionTest.class);
 
 
     public void testAnalysisSampleCollectionInformation() throws Exception {

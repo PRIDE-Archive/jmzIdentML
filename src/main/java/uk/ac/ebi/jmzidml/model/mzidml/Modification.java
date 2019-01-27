@@ -99,7 +99,7 @@ public class Modification
      *     
      */
     public Integer getLocation() {
-        return location;
+        return (location == null) ? -1 : location;
     }
 
     /**
@@ -111,7 +111,7 @@ public class Modification
      *     
      */
     public void setLocation(Integer value) {
-        this.location = value;
+        this.location = (value == null) ? -1 : value;
     }
 
     /**

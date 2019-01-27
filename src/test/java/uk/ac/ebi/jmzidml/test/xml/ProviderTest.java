@@ -8,7 +8,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
@@ -17,11 +17,11 @@ import java.net.URL;
 
 public class ProviderTest extends TestCase{
 
-    Logger log = Logger.getLogger(ProviderTest.class);
+    org.slf4j.Logger logger = LoggerFactory.getLogger(ProviderTest.class);
 
     
     public void testProviderInformation() throws Exception {
-        log.info("testing the <Provider> content.");
+        logger.info("testing the <Provider> content.");
         URL xmlFileURL = ProviderTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
         assertNotNull(xmlFileURL);
 

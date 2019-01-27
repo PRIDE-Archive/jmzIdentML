@@ -1,7 +1,7 @@
 package uk.ac.ebi.jmzidml.test.xml;
 
 import junit.framework.TestCase;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.model.mzidml.params.FileFormatCvParam;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class DataCollectionTest extends TestCase {
 
-    Logger log = Logger.getLogger(DataCollectionTest.class);
+    org.slf4j.Logger logger = LoggerFactory.getLogger(DataCollectionTest.class);
 
 
     public void testDataCollectionInformation() throws Exception {
@@ -42,7 +42,7 @@ public class DataCollectionTest extends TestCase {
         assertEquals("SwissProt", searchDBName);
         assertEquals("SDB_SwissProt", searchDB);
         assertEquals("SwissProt_51.6.fasta", asd.getVersion());
-        log.debug("Inout -> SearchDatabase Location:" + asd.getLocation() + " Id:" + asd.getId()
+        logger.debug("Inout -> SearchDatabase Location:" + asd.getLocation() + " Id:" + asd.getId()
                 + " Name:" + asd.getName() + " Version:" + asd.getVersion());
 
         assertNotNull(asd.getFileFormat());
@@ -57,7 +57,7 @@ public class DataCollectionTest extends TestCase {
         SourceFile sourceFile = dcInputs.getSourceFile().get(0);
         assertNotNull(sourceFile);
         assertTrue(sourceFile.getLocation().endsWith(".dat"));
-        log.debug("Input -> SourceFile : Location:" + sourceFile.getLocation());
+        logger.debug("Input -> SourceFile : Location:" + sourceFile.getLocation());
 
         assertEquals(1, dcInputs.getSpectraData().size());
         SpectraData spectraData = dcInputs.getSpectraData().get(0);

@@ -28,8 +28,7 @@
  */
 package uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller;
 
-import com.ctc.wstx.sax.WstxSAXParserFactory;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import uk.ac.ebi.jmzidml.model.utils.ModelConstants;
@@ -48,7 +47,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 public class UnmarshallerFactory {
 
-    private static final Logger logger = Logger.getLogger(UnmarshallerFactory.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UnmarshallerFactory.class);
 
     private static UnmarshallerFactory instance = new UnmarshallerFactory();
     private static JAXBContext jc = null;
@@ -103,8 +102,9 @@ public class UnmarshallerFactory {
 //            inputFactory.configureForSpeed();
 //            SAXParserFactory factory = new WstxSAXParserFactory(inputFactory);
 
-            SAXParserFactory factory = new WstxSAXParserFactory();
+           // SAXParserFactory factory = new WstxSAXParserFactory();
 
+            SAXParserFactory factory = SAXParserFactory.newInstance();
             factory.setNamespaceAware(true);
             SAXParser parser = factory.newSAXParser();
             XMLReader xmlReader = parser.getXMLReader();

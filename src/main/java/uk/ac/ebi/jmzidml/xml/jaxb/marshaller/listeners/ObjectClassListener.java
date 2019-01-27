@@ -1,6 +1,6 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.marshaller.listeners;
 
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 
 import javax.xml.bind.Marshaller;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ObjectClassListener extends Marshaller.Listener {
 
-    private static final Logger log = Logger.getLogger(ObjectClassListener.class);
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(ObjectClassListener.class);
 
     public void beforeMarshal(Object source){
         log.debug("Handling " + source.getClass() + " in beforeMarshal.");

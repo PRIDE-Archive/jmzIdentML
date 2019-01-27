@@ -22,7 +22,7 @@
 
 package uk.ac.ebi.jmzidml.xml.io;
 
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
@@ -44,7 +44,7 @@ import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 
 public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Iterator<T> {
 
-    private static Logger logger = Logger.getLogger(MzIdentMLObjectIterator.class);
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(MzIdentMLObjectIterator.class);
 
     private Iterator<String> innerXpathIterator;
     private String xpath;
@@ -87,8 +87,13 @@ public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Itera
             }
 
             //required for the addition of namespaces to top-level objects
+
             MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter(version);
             //initializeUnmarshaller will assign the proper reader to the xmlFilter
+
+            //MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
+            //initializeUnmarshaller will assign the proper expressionatlas to the xmlFilter
+
             Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
             //unmarshall the desired object
             JAXBElement<T> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(cleanXML))), cls);
