@@ -1,6 +1,8 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
@@ -33,7 +35,7 @@ import javax.xml.transform.sax.SAXSource;
  */
 public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> extends Unmarshaller.Listener {
 
-    private static final Logger log = Logger.getLogger(AbstractReferenceResolver.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractReferenceResolver.class);
 
     // ToDo: check if we need the cache here or if we can handle this from another level (e.g. the MzIdentMLUnmarshaller)
     private MzIdentMLIndexer index = null;

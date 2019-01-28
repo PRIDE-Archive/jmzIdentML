@@ -23,8 +23,9 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.adapters;
 
 import java.io.StringReader;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
 import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;

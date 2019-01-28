@@ -12,7 +12,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
 
-import uk.ac.ebi.jmzidml.model.utils.ModelConstants;
 import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 
 /**
@@ -21,7 +20,7 @@ import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 public class MzIdentMLNamespaceFilter extends XMLFilterImpl {
 
 
-    private static final Logger logger = Logger.getLogger(MzIdentMLNamespaceFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(MzIdentMLNamespaceFilter.class);
     private MzIdentMLVersion mzidVer = MzIdentMLVersion.Version_1_1;  // default vesion is mzIdentML 1.1
 
     //private static final Logger logger = LoggerFactory.getLogger(MzIdentMLNamespaceFilter.class);
