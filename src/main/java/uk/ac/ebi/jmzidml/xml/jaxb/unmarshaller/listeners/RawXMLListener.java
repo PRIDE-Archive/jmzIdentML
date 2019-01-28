@@ -1,6 +1,7 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.listeners;
 
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
+
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.ParamListMappings;
 import uk.ac.ebi.jmzidml.ParamMappings;
@@ -12,8 +13,11 @@ import uk.ac.ebi.jmzidml.xml.jaxb.resolver.AbstractReferenceResolver;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
 import javax.xml.bind.Unmarshaller;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 
 /**
  * Listener to handle class specific post processing steps during unmarshalling.
@@ -29,13 +33,15 @@ import java.lang.reflect.Method;
  */
 public class RawXMLListener extends Unmarshaller.Listener {
 
-    private static final org.slf4j.Logger log = LoggerFactory.getLogger(RawXMLListener.class);
+    private static final Logger log = Logger.getLogger(RawXMLListener.class);
     private final MzIdentMLIndexer index;
     private final MzIdentMLObjectCache cache;
+    private MzIdentMLVersion version;
 
-    public RawXMLListener(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
+    public RawXMLListener(MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLVersion version) {
         this.index = index;
         this.cache = cache;
+        this.version = version;
     }
 
     @Override
@@ -182,8 +188,8 @@ public class RawXMLListener extends Unmarshaller.Listener {
                 throw new IllegalStateException("Can not auto-resolve references if no reference resolver was defined for class: " + ele.getClazz());
             }
             try {
-                Constructor con = cls.getDeclaredConstructor(MzIdentMLIndexer.class, MzIdentMLObjectCache.class);
-                AbstractReferenceResolver resolver = (AbstractReferenceResolver) con.newInstance(index, cache);
+                Constructor con = cls.getDeclaredConstructor(MzIdentMLIndexer.class, MzIdentMLObjectCache.class, MzIdentMLVersion.class);
+                AbstractReferenceResolver resolver = (AbstractReferenceResolver) con.newInstance(index, cache, version);
                 resolver.afterUnmarshal(target, parent);
 
             } catch (Exception e) {
@@ -192,5 +198,4 @@ public class RawXMLListener extends Unmarshaller.Listener {
             }
         }
     }
-
 }

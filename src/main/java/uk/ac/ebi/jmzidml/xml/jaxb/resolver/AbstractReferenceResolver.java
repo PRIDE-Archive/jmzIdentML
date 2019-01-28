@@ -1,23 +1,26 @@
 package uk.ac.ebi.jmzidml.xml.jaxb.resolver;
 
-
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.xml.sax.InputSource;
+
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.model.mzidml.AbstractContact;
 import uk.ac.ebi.jmzidml.model.mzidml.Organization;
 import uk.ac.ebi.jmzidml.model.mzidml.Person;
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 import uk.ac.ebi.jmzidml.xml.io.MzIdentMLObjectCache;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.filters.MzIdentMLNamespaceFilter;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 
+
+import java.io.StringReader;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.sax.SAXSource;
-import java.io.StringReader;
 
 /**
  * Abstract base class for the reference resolver classes.
@@ -30,16 +33,17 @@ import java.io.StringReader;
  */
 public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> extends Unmarshaller.Listener {
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(AbstractReferenceResolver.class);
+    private static final Logger log = Logger.getLogger(AbstractReferenceResolver.class);
 
     // ToDo: check if we need the cache here or if we can handle this from another level (e.g. the MzIdentMLUnmarshaller)
     private MzIdentMLIndexer index = null;
     private MzIdentMLObjectCache cache = null;
+    private MzIdentMLVersion version = MzIdentMLVersion.Version_1_1; //default mzIdetnML version is 1.1
 
-
-    protected AbstractReferenceResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
+    protected AbstractReferenceResolver(MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLVersion version) {
         this.index = index;
         this.cache = cache;
+        this.version = version;
     }
 
 
@@ -54,13 +58,13 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
         // if the referenced object/element is not yet in the cache (or no cache
         // is available) create it from the XML using the index and ID maps
 
-        logger.debug("AbstractReferenceResolver.unmarshal for id: " + refId);
+        log.debug("AbstractReferenceResolver.unmarshal for id: " + refId);
         // first retrieve the XML snippet representing the referenced object/element
         String xml;
         // special case for ContactRole.class as we can either have a Person.class or a Organisation.class
 
         if (cls == AbstractContact.class) {
-            logger.debug("SPECIAL CASE: ContactRole");
+            log.debug("SPECIAL CASE: ContactRole");
             // see if the ID fits a Person
             String personXML = index.getXmlString(refId, Person.class);
             // see if the ID fits an Organisation
@@ -80,9 +84,9 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
 
         try {
             // required for the addition of namespaces to top-level objects
-            MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
+            MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter(version);
 
-            // initializeUnmarshaller will assign the proper expressionatlas to the xmlFilter
+            // initializeUnmarshaller will assign the proper reader to the xmlFilter
             Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
 
             // need to do it this way because snippet does not have a XmlRootElement annotation
@@ -104,7 +108,7 @@ public abstract class AbstractReferenceResolver<T extends MzIdentMLObject> exten
 //                }
 
         } catch (JAXBException e) {
-            logger.error("AbstractReferenceResolver.unmarshal", e);
+            log.error("AbstractReferenceResolver.unmarshal", e);
             throw new IllegalStateException("Could not unmarshall refId: " + refId + " for element type: " + cls);
         }
 

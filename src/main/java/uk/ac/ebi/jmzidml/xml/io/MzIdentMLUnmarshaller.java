@@ -1,13 +1,14 @@
-/**
- *
+/*
  * Adopted by Ritesh
  * Date - May 27, 2010
  */
+
 package uk.ac.ebi.jmzidml.xml.io;
 
 
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
+
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
@@ -17,11 +18,6 @@ import uk.ac.ebi.jmzidml.xml.xxindex.FileUtils;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexer;
 import uk.ac.ebi.jmzidml.xml.xxindex.MzIdentMLIndexerFactory;
 
-import javax.naming.ConfigurationException;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.sax.SAXSource;
 import java.io.File;
 import java.io.StringReader;
 import java.net.URL;
@@ -32,6 +28,13 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.naming.ConfigurationException;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.sax.SAXSource;
+
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 
 public class MzIdentMLUnmarshaller {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MzIdentMLUnmarshaller.class);
@@ -49,7 +52,8 @@ public class MzIdentMLUnmarshaller {
     private static final Pattern NAME_PATTERN = Pattern.compile("name\\s*=\\s*[\"']([^\"'>]*)?[\"']", Pattern.CASE_INSENSITIVE);
     private static final Pattern XML_ATT_PATTERN = Pattern.compile("\\s+([A-Za-z_:]+)\\s*=\\s*[\"']([^\"'>]+?)[\"']", Pattern.DOTALL);
 
-    ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
+    private MzIdentMLVersion mzIdentVersion = null;
+    ///// ///// ///// ///// ///// ///// ///// ///// /////
     // Constructor
 
     /**
@@ -75,6 +79,13 @@ public class MzIdentMLUnmarshaller {
     public MzIdentMLUnmarshaller(MzIdentMLIndexer indexer) {
         this.index = indexer;
         this.cache = null;
+        if (this.getMzIdentMLVersion().startsWith("1.1")){
+            this.mzIdentVersion = MzIdentMLVersion.Version_1_1;
+        } else if (this.mzidVersion.startsWith("1.2")){
+            this.mzIdentVersion = MzIdentMLVersion.Version_1_2;
+        } else {
+            throw new IllegalStateException("The mzIdentML file version is not recognized!");
+        }
     }
 
     @Deprecated
@@ -230,7 +241,7 @@ public class MzIdentMLUnmarshaller {
 //        }
 
         // we have to iterate over the XML elements
-        return new MzIdentMLObjectIterator<T>(element, index, cache);
+        return new MzIdentMLObjectIterator<T>(element, index, cache, mzIdentVersion);
     }
 
     /**
@@ -315,9 +326,9 @@ public class MzIdentMLUnmarshaller {
         if (logger.isDebugEnabled()) {
             logger.trace("XML to unmarshal: " + cleanXML);
         }
-
+        
         // Create a filter to intercept events -- and patch the missing namespace
-        MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
+        MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter(mzIdentVersion);
 
         //required for the addition of namespaces to top-level objects
         //MzMLNamespaceFilter xmlFilter = new MzMLNamespaceFilter();

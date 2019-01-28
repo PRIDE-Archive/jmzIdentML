@@ -24,6 +24,7 @@ package uk.ac.ebi.jmzidml.xml.io;
 
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
+
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.MzIdentMLObject;
 import uk.ac.ebi.jmzidml.xml.jaxb.unmarshaller.UnmarshallerFactory;
@@ -35,8 +36,11 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.sax.SAXSource;
+
 import java.io.StringReader;
 import java.util.Iterator;
+
+import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
 
 public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Iterator<T> {
 
@@ -47,14 +51,16 @@ public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Itera
     private Class<T> cls;
     private MzIdentMLIndexer index;
     private MzIdentMLObjectCache cache;
+    private MzIdentMLVersion version;
 
 
-    MzIdentMLObjectIterator(MzIdentMLElement element, MzIdentMLIndexer index, MzIdentMLObjectCache cache) {
+    MzIdentMLObjectIterator(MzIdentMLElement element, MzIdentMLIndexer index, MzIdentMLObjectCache cache, MzIdentMLVersion version) {
         innerXpathIterator = index.getXmlStringIterator(element.getXpath());
         this.xpath = element.getXpath();
         this.cls = element.getClazz();
         this.index = index;
         this.cache = cache;
+        this.version = version;
     }
 
 
@@ -81,8 +87,13 @@ public class MzIdentMLObjectIterator<T extends MzIdentMLObject> implements Itera
             }
 
             //required for the addition of namespaces to top-level objects
-            MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
+
+            MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter(version);
+            //initializeUnmarshaller will assign the proper reader to the xmlFilter
+
+            //MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter();
             //initializeUnmarshaller will assign the proper expressionatlas to the xmlFilter
+
             Unmarshaller unmarshaller = UnmarshallerFactory.getInstance().initializeUnmarshaller(index, cache, xmlFilter);
             //unmarshall the desired object
             JAXBElement<T> holder = unmarshaller.unmarshal(new SAXSource(xmlFilter, new InputSource(new StringReader(cleanXML))), cls);
