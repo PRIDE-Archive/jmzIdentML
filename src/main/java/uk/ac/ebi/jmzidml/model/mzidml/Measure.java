@@ -1,7 +1,6 @@
 
 package uk.ac.ebi.jmzidml.model.mzidml;
 
-import uk.ac.ebi.jmzidml.model.CvParamCapable;
 import uk.ac.ebi.jmzidml.model.CvParamListCapable;
 
 import java.io.Serializable;

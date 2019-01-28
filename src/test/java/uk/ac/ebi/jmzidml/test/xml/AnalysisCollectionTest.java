@@ -22,11 +22,9 @@ public class AnalysisCollectionTest extends TestCase {
 
     public void testAnalysisCollectionInformation() throws Exception {
 
-        URL xmlFileURL = AnalysisCollectionTest.class.getClassLoader().getResource("Mascot_MSMS_example.mzid");
+        URL xmlFileURL = AnalysisCollectionTest.class.getClassLoader().getResource("pia_testMzIdentML6299554805835625723.mzid");
         assertNotNull(xmlFileURL);
 
-//        MzIdentMLObjectCache cache = new AdapterObjectCache();
-//        MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, cache);
         MzIdentMLUnmarshaller unmarshaller = new MzIdentMLUnmarshaller(xmlFileURL, true);
         assertNotNull(unmarshaller);
 

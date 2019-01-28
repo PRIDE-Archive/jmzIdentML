@@ -52,6 +52,10 @@ public class MzIdentMLUnmarshaller {
     ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
     // Constructor
 
+    /**
+     * This copy locally the corresponding MzIdentML file
+     * @param mzIdentMLFileURL mzIdentmL URL
+     */
     public MzIdentMLUnmarshaller(URL mzIdentMLFileURL) {
         this(FileUtils.getFileFromURL(mzIdentMLFileURL));
     }

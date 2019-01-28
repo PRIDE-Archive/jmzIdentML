@@ -1,7 +1,6 @@
 package uk.ac.ebi.jmzidml.model;
 
 import uk.ac.ebi.jmzidml.model.mzidml.CvParam;
-import uk.ac.ebi.jmzidml.model.mzidml.Param;
 import uk.ac.ebi.jmzidml.model.mzidml.UserParam;
 
 import java.util.List;

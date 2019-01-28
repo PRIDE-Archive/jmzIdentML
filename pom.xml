@@ -37,7 +37,7 @@
     <properties>
         <uk.ac.ebi.pride.architectural-pride-logging.version>1.0.0</uk.ac.ebi.pride.architectural-pride-logging.version>
         <uk.ac.ebi.pride.architectural-pride-tdd.version>1.0.3</uk.ac.ebi.pride.architectural-pride-tdd.version>
-        <uk.ac.ebi.pride.architectural-pride-xml-handling.version>1.0.3-SNAPSHOT</uk.ac.ebi.pride.architectural-pride-xml-handling.version>
+        <uk.ac.ebi.pride.architectural-pride-xml-handling.version>1.0.3</uk.ac.ebi.pride.architectural-pride-xml-handling.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

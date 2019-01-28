@@ -329,8 +329,10 @@ public class MzIdentMLIndexerFactory {
                     // so far so good, now generate the ID map (if not already present) and populate it
                     Map<String, IndexElement> map = idMapCache.get(element.getClazz());
                     if (map == null) {
-                        map = new HashMap<String, IndexElement>();
+                        map = new HashMap<String, IndexElement>(index.getElements(element.getXpath()).size());
                         idMapCache.put(element.getClazz(), map);
+                    }else{
+                        logger.debug("This IdElement Map already exists");
                     }
                     initIdMapCache(map, element.getXpath());
                 }

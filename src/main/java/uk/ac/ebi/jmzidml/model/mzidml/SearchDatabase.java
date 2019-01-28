@@ -15,7 +15,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import uk.ac.ebi.jmzidml.model.CvParamListCapable;
 import uk.ac.ebi.jmzidml.model.ParamCapable;
-import uk.ac.ebi.jmzidml.model.ParamGroupCapable;
 import uk.ac.ebi.jmzidml.xml.jaxb.adapters.CalendarAdapter;
 
 

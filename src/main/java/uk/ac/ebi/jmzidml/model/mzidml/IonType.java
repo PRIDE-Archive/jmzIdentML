@@ -2,7 +2,6 @@
 package uk.ac.ebi.jmzidml.model.mzidml;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;

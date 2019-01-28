@@ -361,7 +361,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
 
     @Override
     public boolean equals(Object comparedToListObject) {
-        if((comparedToListObject instanceof FacadeList) == false){
+        if(!(comparedToListObject instanceof FacadeList)){
             return false;
         }
         FacadeList<T> comparedToList = (FacadeList) comparedToListObject;
@@ -535,7 +535,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
         }
 
         public void remove() {
-            if (this.nextHasBeenCalled == false) {
+            if (!this.nextHasBeenCalled) {
                 throw new IllegalStateException("Next method for sublist iterator must be called at least once before remove can be called.");
             }
 
@@ -703,7 +703,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
         }
 
         public void remove() {
-            if (this.nextOrPreviousHasBeenCalled == false) {
+            if (!this.nextOrPreviousHasBeenCalled) {
                 throw new IllegalStateException("Next method for sublist iterator must be called at least once before remove can be called.");
             }
             this.nextOrPreviousHasBeenCalled = false;

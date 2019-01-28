@@ -185,7 +185,7 @@ public class FacadeIteratorTest {
     @Test
     public void testForEach() throws Exception {
         for (Object o : this.cvList) {
-            if (o instanceof CvParam == false) {
+            if (!(o instanceof CvParam)) {
                 assertTrue(false);
             }
         }
