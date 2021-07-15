@@ -61,6 +61,12 @@
             <artifactId>pride-xml-handling</artifactId>
             <version>${uk.ac.ebi.pride.architectural-pride-xml-handling.version}</version>
             <type>pom</type>
+            <exclusions>
+                <exclusion>  <!-- declare the exclusion here -->
+                    <groupId>it.unimi.dsi</groupId>
+                    <artifactId>fastutil</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
@@ -141,6 +147,11 @@
     </build>
 
     <repositories>
+        <repository>
+            <id>pst-release</id>
+            <name>EBI Nexus Repository</name>
+            <url>http://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-release</url>
+        </repository>
         <repository>
             <id>nexus-ebi-release-repo</id>
             <url>http://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-repo/</url>
