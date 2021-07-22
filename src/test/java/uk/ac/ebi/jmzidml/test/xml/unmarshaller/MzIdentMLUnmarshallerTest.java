@@ -1,5 +1,6 @@
 package uk.ac.ebi.jmzidml.test.xml.unmarshaller;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.*;
@@ -20,6 +21,7 @@ import static org.junit.Assert.*;
  *         Date: 02-Dec-2010
  * @since 1.0
  */
+@Ignore
 public class MzIdentMLUnmarshallerTest {
 
     private static MzIdentMLUnmarshaller unmarshaller;

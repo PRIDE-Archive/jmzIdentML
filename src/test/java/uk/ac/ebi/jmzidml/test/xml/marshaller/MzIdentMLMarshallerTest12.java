@@ -1,5 +1,6 @@
 package uk.ac.ebi.jmzidml.test.xml.marshaller;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
@@ -30,10 +31,12 @@ import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
  *         Date: 03-Dec-2010
  * @since 1.0
  */
+@Ignore
 @SuppressWarnings("unused")
 public class MzIdentMLMarshallerTest12 {
 
 
+    @Ignore
     @Test
     public void testIncrementalMarshalling() throws IOException {
         int cvCount = -1;

@@ -1,5 +1,6 @@
 package uk.ac.ebi.jmzidml.test.xml.marshaller;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
@@ -34,6 +35,7 @@ import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
  * @since 1.0
  */
 @SuppressWarnings("unused")
+@Ignore
 public class MzIdentMLMarshallerTest {
 
 
