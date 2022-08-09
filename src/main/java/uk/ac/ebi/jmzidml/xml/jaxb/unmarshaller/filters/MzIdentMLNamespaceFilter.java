@@ -21,6 +21,7 @@ public class MzIdentMLNamespaceFilter extends XMLFilterImpl {
 
 
     private static final Logger logger = LoggerFactory.getLogger(MzIdentMLNamespaceFilter.class);
+    public static final String MZ_IDENT_ML_URI = "http://psidev.info/psi/pi/mzIdentML";
     private MzIdentMLVersion mzidVer = MzIdentMLVersion.Version_1_1;  // default vesion is mzIdentML 1.1
 
     //private static final Logger logger = LoggerFactory.getLogger(MzIdentMLNamespaceFilter.class);
@@ -49,9 +50,8 @@ public class MzIdentMLNamespaceFilter extends XMLFilterImpl {
         // so the namespace information is lost and we have to add it again here manually
         logger.trace("Changing namespace. uri: " + uri + " \tlocalName: " + localName + " \tqName: " + qName + " \tatts: " + atts);
         if (uri.length() == 0){
-            super.startElement(this.mzidVer.getNameSpace(), localName, qName, atts);
+            super.startElement(MZ_IDENT_ML_URI, localName, qName, atts);
         }
         else super.startElement(uri, localName, qName, atts);
     }
-    
 }
