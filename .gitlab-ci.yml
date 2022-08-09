@@ -14,15 +14,15 @@ build:
   script:
     - mvn $MAVEN_CLI_OPTS compile
 
-#test:
-#  stage: test
-#  script:
-#    - mvn $MAVEN_CLI_OPTS test
+test:
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS test
 
 deploy:
   stage: deploy
   script:
-    - mvn $MAVEN_CLI_OPTS deploy -Dmaven.test.skip=true
+    - mvn $MAVEN_CLI_OPTS deploy
   when: manual
 #  only:
 #    - master
