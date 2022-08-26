@@ -111,7 +111,7 @@ public class Peptide
      */
     public List<Modification> getModification() {
         if (modification == null) {
-            modification = new ArrayList<Modification>();
+            modification = new ArrayList<>();
         }
         return this.modification;
     }
@@ -140,7 +140,7 @@ public class Peptide
      */
     public List<SubstitutionModification> getSubstitutionModification() {
         if (substitutionModification == null) {
-            substitutionModification = new ArrayList<SubstitutionModification>();
+            substitutionModification = new ArrayList<>();
         }
         return this.substitutionModification;
     }
@@ -170,17 +170,17 @@ public class Peptide
      */
     public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<AbstractParam>();
+            paramGroup = new ArrayList<>();
         }
         return this.paramGroup;
     }
 
     public List<CvParam> getCvParam() {
-        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
+        return new FacadeList<>(this.getParamGroup(), CvParam.class);
     }
 
     public List<UserParam> getUserParam() {
-        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
+        return new FacadeList<>(this.getParamGroup(), UserParam.class);
     }
 
 }

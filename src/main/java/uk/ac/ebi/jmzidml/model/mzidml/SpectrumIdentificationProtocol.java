@@ -220,7 +220,7 @@ public class SpectrumIdentificationProtocol
      */
     public List<MassTable> getMassTable() {
         if (massTable == null) {
-            massTable = new ArrayList<MassTable>();
+            massTable = new ArrayList<>();
         }
         return this.massTable;
     }

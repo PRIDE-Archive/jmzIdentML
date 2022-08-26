@@ -69,7 +69,7 @@ public class ModificationParams
      */
     public List<SearchModification> getSearchModification() {
         if (searchModification == null) {
-            searchModification = new ArrayList<SearchModification>();
+            searchModification = new ArrayList<>();
         }
         return this.searchModification;
     }

@@ -117,13 +117,7 @@ public class UnmarshallerFactory {
 
             return unmarshaller;
 
-        } catch (JAXBException e) {
-            logger.error("UnmarshallerFactory.initializeUnmarshaller", e);
-            throw new IllegalStateException("Could not initialize unmarshaller");
-        } catch (SAXException e) {
-            logger.error("UnmarshallerFactory.initializeUnmarshaller", e);
-            throw new IllegalStateException("Could not initialize unmarshaller");
-        } catch (ParserConfigurationException e) {
+        } catch (JAXBException | ParserConfigurationException | SAXException e) {
             logger.error("UnmarshallerFactory.initializeUnmarshaller", e);
             throw new IllegalStateException("Could not initialize unmarshaller");
         }

@@ -78,7 +78,7 @@ public class Person
      */
     public List<Affiliation> getAffiliation() {
         if (affiliation == null) {
-            affiliation = new ArrayList<Affiliation>();
+            affiliation = new ArrayList<>();
         }
         return this.affiliation;
     }

@@ -168,7 +168,7 @@ public class SpectrumIdentificationItem
      */
     public List<PeptideEvidenceRef> getPeptideEvidenceRef() {
         if (peptideEvidenceRef == null) {
-            peptideEvidenceRef = new ArrayList<PeptideEvidenceRef>();
+            peptideEvidenceRef = new ArrayList<>();
         }
         return this.peptideEvidenceRef;
     }
@@ -225,7 +225,7 @@ public class SpectrumIdentificationItem
      */
     public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<AbstractParam>();
+            paramGroup = new ArrayList<>();
         }
         return this.paramGroup;
     }
@@ -387,7 +387,7 @@ public class SpectrumIdentificationItem
      *    List&lt;CvParam&gt; A FacadeList providing a CvParam view of the underlying param list.
      */
     public List<CvParam> getCvParam() {
-        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
+        return new FacadeList<>(this.getParamGroup(), CvParam.class);
     }
 
     /**
@@ -396,7 +396,7 @@ public class SpectrumIdentificationItem
      *    List&lt;UserParam&gt; A FacadeList providing a UserParam view of the underlying param list.
      */
     public List<UserParam> getUserParam() {
-        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
+        return new FacadeList<>(this.getParamGroup(), UserParam.class);
     }
 
     public String getSpectraDataRef() {

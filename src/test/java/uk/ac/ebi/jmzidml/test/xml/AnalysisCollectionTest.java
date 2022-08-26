@@ -43,7 +43,7 @@ public class AnalysisCollectionTest extends TestCase {
             logger.debug("Protein Detection List: Name: " + pdl.getName() + "\t Id : " + pdl.getId());
 
             int pagCnt = pdl.getProteinAmbiguityGroup().size();
-            assertTrue(pagCnt == 5);
+            assertEquals(5, pagCnt);
             for (ProteinAmbiguityGroup proteinAmbiguityGroup : pdl.getProteinAmbiguityGroup()) {
                 logger.debug("Protein Ambiguity Group: Id: " + proteinAmbiguityGroup.getId()
                         + "\t Name: " + proteinAmbiguityGroup.getName());

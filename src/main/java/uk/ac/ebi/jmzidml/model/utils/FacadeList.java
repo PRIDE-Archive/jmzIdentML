@@ -108,8 +108,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
         boolean em = false;
 
         for (Object anOriginalList : this.originalList) {
-            Object o = anOriginalList;
-            if (clazz.isInstance(o)) {
+            if (clazz.isInstance(anOriginalList)) {
                 em = true;
                 break;
             }
@@ -213,7 +212,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
         }
 
 
-        List<T> result = new ArrayList<T>();
+        List<T> result = new ArrayList<>();
         int cnt = 0;
         int diff = toIndex - fromIndex;
         ListIterator<T> listIter = this.listIterator(fromIndex);
@@ -351,9 +350,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
     @Override
     public int hashCode() {
         int hashCode = 1;
-        Iterator<T> i = this.iterator();
-        while (i.hasNext()) {
-            T obj = i.next();
+        for (T obj : this) {
             hashCode = 31 * hashCode + (obj == null ? 0 : obj.hashCode());
         }
         return hashCode;
@@ -404,9 +401,7 @@ public class FacadeList<T> extends AbstractCollection<T> implements List<T> {
     private T getAtIndex(int index) {
         this.checkIndex(index);
         int cnt = 0;
-        Iterator it = originalList.iterator();
-        while (it.hasNext()) {
-            Object o = it.next();
+        for (Object o : originalList) {
             if (clazz.isInstance(o)) {
                 if (index == cnt) {
                     return (T) o;

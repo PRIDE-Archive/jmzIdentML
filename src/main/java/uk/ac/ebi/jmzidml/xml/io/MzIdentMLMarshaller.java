@@ -201,10 +201,7 @@ public class MzIdentMLMarshaller {
 
             marshaller.marshal( jaxbElement, writer );
 
-        } catch (JAXBException e) {
-            logger.error("MzMLMarshaller.marshall", e);
-            throw new IllegalStateException("Error while marshalling object:" + object.toString());
-        } catch (XMLStreamException e) {
+        } catch (JAXBException | XMLStreamException e) {
             logger.error("MzMLMarshaller.marshall", e);
             throw new IllegalStateException("Error while marshalling object:" + object.toString());
         }
@@ -220,7 +217,7 @@ public class MzIdentMLMarshaller {
     }
 
     public String createMzIdentMLStartTag(String id) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         // tag opening plus id attribute
         sb.append("<MzIdentML id=\"").append(id).append("\"");
@@ -263,7 +260,7 @@ public class MzIdentMLMarshaller {
         }
         // allowed attributes: 'id', 'name'
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         // tag opening plus id attribute
         sb.append("<ProteinDetectionList id=\"").append(id).append("\"");
@@ -287,7 +284,7 @@ public class MzIdentMLMarshaller {
         }
         // allowed attributes: 'id', 'name', 'numSequencesSearched'
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         // tag opening plus id attribute
         sb.append("<SpectrumIdentificationList id=\"").append(id).append("\"");

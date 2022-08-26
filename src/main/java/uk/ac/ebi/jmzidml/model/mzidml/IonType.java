@@ -82,7 +82,7 @@ public class IonType
      */
     public List<FragmentArray> getFragmentArray() {
         if (fragmentArray == null) {
-            fragmentArray = new ArrayList<FragmentArray>();
+            fragmentArray = new ArrayList<>();
         }
         return this.fragmentArray;
     }
@@ -135,7 +135,7 @@ public class IonType
      */
     public List<Integer> getIndex() {
         if (index == null) {
-            index = new ArrayList<Integer>();
+            index = new ArrayList<>();
         }
         return this.index;
     }

@@ -146,7 +146,7 @@ public class MemoryMappedStandardXpathAccess implements XpathAccess {
      
      */
     public List<String> getXmlSnippets(String xpath, Long start, Long stop) throws IOException {
-        List<String> results = new ArrayList<String>();
+        List<String> results = new ArrayList<>();
         // check xpath
         // check if xpath in index
         if (index.containsXpath(xpath)) {
@@ -277,7 +277,7 @@ public class MemoryMappedStandardXpathAccess implements XpathAccess {
             if (start == null && stop == null) {
                 validElements = elements;
             } else { // if at least one border is specified, we need a new list containing only valid elements
-                validElements = new ArrayList<IndexElement>();
+                validElements = new ArrayList<>();
                 // iterate over the initial list and add only the valid elements to the new list
                 for (IndexElement element : elements) {
                     if ((start == null || element.getStart() >= start) && (stop == null || element.getStop() <= stop)) {
@@ -346,7 +346,7 @@ public class MemoryMappedStandardXpathAccess implements XpathAccess {
      * @throws IOException when IO Error while reading from the XML file.
      */
     public List<XmlElement> getXmlElements(String xpath, Long start, Long stop) throws IOException {
-        List<XmlElement> results = new ArrayList<XmlElement>();
+        List<XmlElement> results = new ArrayList<>();
         // check xpath
         // check if xpath in index
         // if yes, transform (range + line number) into (xml snippet + line number)
@@ -430,7 +430,7 @@ public class MemoryMappedStandardXpathAccess implements XpathAccess {
             if (start == null && stop == null) {
                 validElements = elements;
             } else { // if at least one borders is specified, we need a new list containing only valid elements
-                validElements = new ArrayList<IndexElement>();
+                validElements = new ArrayList<>();
                 // iterate over the initial list and only add the valid elements to the new list
                 for (IndexElement element : elements) {
                     if ((start == null || element.getStart() >= start) && (stop == null || element.getStop() <= stop)) {

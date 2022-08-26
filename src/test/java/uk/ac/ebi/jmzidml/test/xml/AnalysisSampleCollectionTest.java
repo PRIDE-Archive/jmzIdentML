@@ -34,19 +34,19 @@ public class AnalysisSampleCollectionTest extends TestCase {
 
         assertEquals(2, asc.getSample().size());
         Sample sample = asc.getSample().get(0);
-        assertTrue(sample.getContactRole().size() == 2);
-        assertTrue(sample.getParamGroup().size() == 2);
+        assertEquals(2, sample.getContactRole().size());
+        assertEquals(2, sample.getParamGroup().size());
         ContactRole contactRole = sample.getContactRole().get(0);
 
         AbstractContact contact = contactRole.getContact();
         if (MzIdentMLElement.ContactRole.isAutoRefResolving()) {
-            assertTrue(contact != null);
+            assertNotNull(contact);
             System.out.println("resolving");
         } else {
-            assertTrue(contact == null);
+            assertNull(contact);
             System.out.println("not resolving");
         }
-        assertTrue(contactRole.getRole().getCvParam().getAccession().equals("MS:1001267"));
+        assertEquals("MS:1001267", contactRole.getRole().getCvParam().getAccession());
 /**
 
             assertEquals("We expect one CvParam.", 2, sample.getParamGroup().size());

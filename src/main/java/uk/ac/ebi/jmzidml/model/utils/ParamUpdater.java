@@ -96,7 +96,7 @@ public class ParamUpdater {
             throws InstantiationException, IllegalAccessException {
         if (inputs != null && inputs.size() > 0) {
             // create tmp holder
-            List<T> newList = new ArrayList<T>();
+            List<T> newList = new ArrayList<>();
 
             // copy values to new SubClasses
             for (CvParam cvParam : inputs) {
@@ -135,7 +135,7 @@ public class ParamUpdater {
     public static <T extends UserParam> void updateUserParamSubclassesList(List<UserParam> inputs, Class<T> userParamSubClass) throws InstantiationException, IllegalAccessException {
         if (inputs != null && inputs.size() > 0) {
             // create tmp holder
-            List<T> newList = new ArrayList<T>();
+            List<T> newList = new ArrayList<>();
 
             // copy values to new SubClasses
             for (UserParam userParam : inputs) {

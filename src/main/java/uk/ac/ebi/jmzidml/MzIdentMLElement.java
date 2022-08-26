@@ -1079,7 +1079,7 @@ public enum MzIdentMLElement {
 
     private static Map<String, MzIdentMLElementConfig> getCfg() {
         if (cfgMap == null) {
-            cfgMap = new HashMap<String, MzIdentMLElementConfig>();
+            cfgMap = new HashMap<>();
         }
         return cfgMap;
     }

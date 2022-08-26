@@ -76,7 +76,7 @@ public class AuditCollection
      */
     public List<AbstractContact> getPersonOrOrganization() {
         if (personOrOrganization == null) {
-            personOrOrganization = new ArrayList<AbstractContact>();
+            personOrOrganization = new ArrayList<>();
         }
         return this.personOrOrganization;
     }
@@ -88,7 +88,7 @@ public class AuditCollection
      * @return List&lt;Person&gt; The list of Person Contacts.
      */
     public List<Person> getPerson() {
-        return new FacadeList<Person>(this.getPersonOrOrganization(), Person.class);
+        return new FacadeList<>(this.getPersonOrOrganization(), Person.class);
     }
 
     /**
@@ -97,6 +97,6 @@ public class AuditCollection
      * @return
      */
     public List<Organization> getOrganization() {
-        return new FacadeList<Organization>(this.getPersonOrOrganization(), Organization.class);
+        return new FacadeList<>(this.getPersonOrOrganization(), Organization.class);
     }
 }

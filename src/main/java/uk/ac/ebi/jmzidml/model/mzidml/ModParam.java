@@ -115,7 +115,7 @@ public class ModParam
      */
     public List<String> getResidues() {
         if (residues == null) {
-            residues = new ArrayList<String>();
+            residues = new ArrayList<>();
         }
         return this.residues;
     }

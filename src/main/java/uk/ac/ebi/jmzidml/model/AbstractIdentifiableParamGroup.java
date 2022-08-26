@@ -24,14 +24,14 @@ public abstract class AbstractIdentifiableParamGroup extends Identifiable implem
 
     public List<CvParam> getCvParam() {
         if (cvParams == null) {
-            cvParams = new ArrayList<CvParam>();
+            cvParams = new ArrayList<>();
         }
         return cvParams;
     }
 
     public List<UserParam> getUserParam() {
         if (userParams == null) {
-            userParams = new ArrayList<UserParam>();
+            userParams = new ArrayList<>();
         }
         return userParams;
     }

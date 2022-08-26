@@ -58,7 +58,7 @@ public class Constants {
         Measure
     }
 
-    private static Set<String> xpathsToIndex = new HashSet<String>();
+    private static Set<String> xpathsToIndex = new HashSet<>();
 
     static {
         for (MzIdentMLElement element : MzIdentMLElement.values()) {

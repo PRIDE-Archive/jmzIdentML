@@ -51,7 +51,7 @@ public class ModelConstants {
     public static final String MZIDML_VERSION_1_2 = "1.2.0";
     public static final String MZIDML_SCHEMA_1_2 = "http://www.psidev.info/files/mzIdentML1.2.0.xsd";
 
-    private static Map<Class, QName> modelQNames = new HashMap<Class, QName>();
+    private static Map<Class, QName> modelQNames = new HashMap<>();
 
     static {
         for (MzIdentMLElement element : MzIdentMLElement.values()) {
