@@ -86,6 +86,13 @@ public class MzIdentMLUnmarshaller {
         } else {
             throw new IllegalStateException("The mzIdentML file version is not recognized!");
         }
+        try {
+            MzIdentMLNamespaceFilter.changeNamespaceBinding(this.mzIdentVersion.getNameSpace());
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Deprecated
