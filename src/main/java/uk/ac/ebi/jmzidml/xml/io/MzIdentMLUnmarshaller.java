@@ -333,11 +333,6 @@ public class MzIdentMLUnmarshaller {
         if (logger.isDebugEnabled()) {
             logger.trace("XML to unmarshal: " + cleanXML);
         }
-
-//        if(cleanXML.contains("xmlns")){
-//            cleanXML = cleanXML.replaceAll("xmlns.*=\".*\"","");
-//        }
-
         
         // Create a filter to intercept events -- and patch the missing namespace
         MzIdentMLNamespaceFilter xmlFilter = new MzIdentMLNamespaceFilter(mzIdentVersion);

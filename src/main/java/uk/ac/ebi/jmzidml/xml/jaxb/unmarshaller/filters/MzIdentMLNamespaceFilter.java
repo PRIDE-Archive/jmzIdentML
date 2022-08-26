@@ -61,6 +61,12 @@ public class MzIdentMLNamespaceFilter extends XMLFilterImpl {
         else super.startElement(uri, localName, qName, atts);
     }
 
+    /**
+     * This method is used to change the JAXB binding of model classes from mzid version 1.1 to 1.2
+     * @param namespace
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     */
     public static void changeNamespaceBinding(String namespace) throws IllegalAccessException, ClassNotFoundException {
         Annotation annotation = ClassLoader.getSystemClassLoader()
                 .loadClass("uk.ac.ebi.jmzidml.model.mzidml.package-info").getAnnotation(XmlSchema.class);

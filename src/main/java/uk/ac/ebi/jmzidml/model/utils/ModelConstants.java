@@ -41,8 +41,6 @@ import javax.xml.namespace.QName;
 public class ModelConstants {
 
     public static final String PACKAGE = MzIdentML.class.getPackage().getName();
-
-    public static final String MZIDML_NS_URI = "http://psidev.info/psi/pi/mzIdentML";
     public static final String MZIDML_NS = "http://psidev.info/psi/pi/mzIdentML/1.1";
     public static final String MZIDML_VERSION = "1.1.0";
     public static final String MZIDML_SCHEMA = "http://www.psidev.info/files/mzIdentML1.1.0.xsd";
