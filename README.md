@@ -1,14 +1,45 @@
-A Java API to the Proteomics Standards Initiative's mzIdentML format (version 1.1 - PSI stable version).
+# jmzIdentML
+[![Java CI with Maven](https://github.com/PRIDE-Utilities/jmzIdentML/actions/workflows/maven.yml/badge.svg)](https://github.com/PRIDE-Utilities/jmzIdentML/actions/workflows/maven.yml)
 
-The mzIdentML data standard captures peptide and protein identification data, generated from mass spectrometry. 
+A Java API to the Proteomics Standards Initiative's mzIdentML format. The [mzIdentML](https://www.psidev.info/mzidentml) data standard captures peptide and protein identification data, generated from mass spectrometry.
 For more information about mzIdentML.
 
-The API can be imported directly as a jar file to provide access to read and write functionality for mzIdentML. 
-The API builds on top of JaxB capabilities, by providing an indexing scheme that allows random access to parts of the file. 
-Under the wiki there are some code snippets showing example usage.
+## mzIdentML versions supported
 
-The API is used as part of parsers for converting X!Tandem's XML file output and Omssa's OMX (XML) output 
-to mzIdentML, accessible from: http://code.google.com/p/mzidentml-parsers/.
+Currently, the jmzIdentML supports the two major mzIdentML versions: 
 
-Using jMzIdentML Under Downloads - http://code.google.com/p/jmzidentml/downloads/list there is a zip file
-containing the main jar that can be imported directly into software.
+- [mzIdentML 1.1](https://www.psidev.info/mzidentml#mzIdentML1_1_1)
+- [mzIdentML 1.2](https://www.psidev.info/mzidentml#mzid12)
+
+## jmzIdentML API
+
+The API can be imported directly as a jar file to provide access to read and write functionality for mzIdentML. The API builds on top of JaxB capabilities, by providing an indexing scheme that allows random access to parts of the file. 
+
+In order to use the library in your pom file, please use the following code snippet: 
+
+```pom
+<dependency>
+  <groupId>uk.ac.ebi.jmzidml</groupId>
+  <artifactId>jmzidentml</artifactId>
+  <version>${version}</version>
+</dependency>
+```
+
+The current maven repository that stores the jmzIdentML is: 
+
+```pom
+<repositories>
+    <repository>
+      <id>nexus-ebi-release-repo</id>
+      <url>https://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-repo/</url>
+    </repository>
+    <repository>
+      <id>nexus-ebi-snapshot-repo</id>
+      <url>https://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-snapshots/</url>
+    </repository>
+</repositories>
+```
+
+## Issues and Reports 
+
+Issues, bugs and errors can be reported in the following link: https://github.com/PRIDE-Utilities/jmzIdentML/issues
