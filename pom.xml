@@ -4,7 +4,7 @@
     <groupId>uk.ac.ebi.jmzidml</groupId>
     <artifactId>jmzidentml</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.13-SNAPSHOT</version>
+    <version>1.2.13</version>
     <name>mzIdentML Java core API</name>
     <url>https://github.com/PRIDE-Utilities/jmzIdentML</url>
 
