@@ -73,7 +73,7 @@ public class AnalysisCollection
      */
     public List<SpectrumIdentification> getSpectrumIdentification() {
         if (spectrumIdentification == null) {
-            spectrumIdentification = new ArrayList<SpectrumIdentification>();
+            spectrumIdentification = new ArrayList<>();
         }
         return this.spectrumIdentification;
     }

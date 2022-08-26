@@ -87,7 +87,7 @@ public class MassTable
      */
     public List<Residue> getResidue() {
         if (residue == null) {
-            residue = new ArrayList<Residue>();
+            residue = new ArrayList<>();
         }
         return this.residue;
     }
@@ -116,7 +116,7 @@ public class MassTable
      */
     public List<AmbiguousResidue> getAmbiguousResidue() {
         if (ambiguousResidue == null) {
-            ambiguousResidue = new ArrayList<AmbiguousResidue>();
+            ambiguousResidue = new ArrayList<>();
         }
         return this.ambiguousResidue;
     }
@@ -146,7 +146,7 @@ public class MassTable
      */
     public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<AbstractParam>();
+            paramGroup = new ArrayList<>();
         }
         return this.paramGroup;
     }
@@ -175,16 +175,16 @@ public class MassTable
      */
     public List<Integer> getMsLevel() {
         if (msLevel == null) {
-            msLevel = new ArrayList<Integer>();
+            msLevel = new ArrayList<>();
         }
         return this.msLevel;
     }
 
     public List<CvParam> getCvParam() {
-        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
+        return new FacadeList<>(this.getParamGroup(), CvParam.class);
     }
 
     public List<UserParam> getUserParam() {
-        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
+        return new FacadeList<>(this.getParamGroup(), UserParam.class);
     }
 }

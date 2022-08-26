@@ -145,15 +145,15 @@ public class MemoryMappedXmlElementExtractor {
     public byte[] readBytes(long from, long to, InputStream inputStream) throws IOException {
         byte[] bytes;
 
-        Long length = to - from;
+        long length = to - from;
         if (length > Integer.MAX_VALUE) {
             throw new IllegalArgumentException("Can not read more than " + Integer.MAX_VALUE + " bytes!");
         }
-        bytes = new byte[length.intValue()];
+        bytes = new byte[(int) length];
 
         // read into buffer
         inputStream.skip(from);
-        inputStream.read(bytes, 0, length.intValue());
+        inputStream.read(bytes, 0, (int) length);
 
         return bytes;
     }

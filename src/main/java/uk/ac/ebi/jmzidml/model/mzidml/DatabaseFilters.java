@@ -70,7 +70,7 @@ public class DatabaseFilters
      */
     public List<Filter> getFilter() {
         if (filter == null) {
-            filter = new ArrayList<Filter>();
+            filter = new ArrayList<>();
         }
         return this.filter;
     }

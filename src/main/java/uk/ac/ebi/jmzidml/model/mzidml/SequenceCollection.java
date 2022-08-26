@@ -77,7 +77,7 @@ public class SequenceCollection
      */
     public List<DBSequence> getDBSequence() {
         if (dbSequence == null) {
-            dbSequence = new ArrayList<DBSequence>();
+            dbSequence = new ArrayList<>();
         }
         return this.dbSequence;
     }
@@ -106,7 +106,7 @@ public class SequenceCollection
      */
     public List<Peptide> getPeptide() {
         if (peptide == null) {
-            peptide = new ArrayList<Peptide>();
+            peptide = new ArrayList<>();
         }
         return this.peptide;
     }
@@ -135,7 +135,7 @@ public class SequenceCollection
      */
     public List<PeptideEvidence> getPeptideEvidence() {
         if (peptideEvidence == null) {
-            peptideEvidence = new ArrayList<PeptideEvidence>();
+            peptideEvidence = new ArrayList<>();
         }
         return this.peptideEvidence;
     }

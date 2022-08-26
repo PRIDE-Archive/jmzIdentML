@@ -88,9 +88,7 @@ public class MzIdentMLUnmarshaller {
         }
         try {
             MzIdentMLNamespaceFilter.changeNamespaceBinding(this.mzIdentVersion.getNameSpace());
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (IllegalAccessException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -160,7 +158,7 @@ public class MzIdentMLUnmarshaller {
     }
 
     public Map<String, String> getElementAttributes(String xmlTag) {
-        Map<String, String> attributes = new HashMap<String, String>();
+        Map<String, String> attributes = new HashMap<>();
 
         // parse the tag for attributes
         Matcher match = XML_ATT_PATTERN.matcher(xmlTag);
@@ -248,7 +246,7 @@ public class MzIdentMLUnmarshaller {
 //        }
 
         // we have to iterate over the XML elements
-        return new MzIdentMLObjectIterator<T>(element, index, cache, mzIdentVersion);
+        return new MzIdentMLObjectIterator<>(element, index, cache, mzIdentVersion);
     }
 
     /**

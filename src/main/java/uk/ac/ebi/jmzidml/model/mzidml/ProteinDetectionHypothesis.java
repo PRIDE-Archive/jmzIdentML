@@ -83,7 +83,7 @@ public class ProteinDetectionHypothesis
      */
     public List<PeptideHypothesis> getPeptideHypothesis() {
         if (peptideHypothesis == null) {
-            peptideHypothesis = new ArrayList<PeptideHypothesis>();
+            peptideHypothesis = new ArrayList<>();
         }
         return this.peptideHypothesis;
     }
@@ -113,7 +113,7 @@ public class ProteinDetectionHypothesis
      */
     public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<AbstractParam>();
+            paramGroup = new ArrayList<>();
         }
         return this.paramGroup;
     }
@@ -163,10 +163,10 @@ public class ProteinDetectionHypothesis
     }
 
     public List<CvParam> getCvParam() {
-        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
+        return new FacadeList<>(this.getParamGroup(), CvParam.class);
     }
 
     public List<UserParam> getUserParam() {
-        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
+        return new FacadeList<>(this.getParamGroup(), UserParam.class);
     }
 }

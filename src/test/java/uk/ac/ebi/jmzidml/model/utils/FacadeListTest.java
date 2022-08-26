@@ -26,7 +26,7 @@ public class FacadeListTest {
 
     @Before
     public void setUp() throws Exception {
-        paramList = new ArrayList<AbstractParam>();
+        paramList = new ArrayList<>();
 
         CvParam cv = new CvParam();
         cv.setAccession("CV1");
@@ -56,8 +56,8 @@ public class FacadeListTest {
         user2.setName("User3");
         paramList.add(user2);
 
-        cvList = new FacadeList<CvParam>(paramList, CvParam.class);
-        userList = new FacadeList<UserParam>(paramList, UserParam.class);
+        cvList = new FacadeList<>(paramList, CvParam.class);
+        userList = new FacadeList<>(paramList, UserParam.class);
     }
 
 
@@ -68,10 +68,10 @@ public class FacadeListTest {
         this.cvList.add(cv);
         try {
             cv = this.cvList.get(4);
-            assertTrue(cv.getAccession().equals("CV5"));
+            assertEquals("CV5", cv.getAccession());
         } catch (Exception e) {
             e.printStackTrace();
-            assertTrue(false);
+            fail();
         }
     }
 
@@ -94,14 +94,14 @@ public class FacadeListTest {
         try {
 
             cv = this.cvList.get(1);
-            assertTrue(cv.getAccession().equals("CV5"));
+            assertEquals("CV5", cv.getAccession());
 
             cv = this.cvList.get(4);
-            assertTrue(cv.getAccession().equals("CV4"));
+            assertEquals("CV4", cv.getAccession());
 
         } catch (Exception e) {
             e.printStackTrace();
-            assertTrue(false);
+            fail();
         }
     }
 
@@ -113,9 +113,9 @@ public class FacadeListTest {
     @Test
     public void testGetAtIndex() throws Exception {
         CvParam cv = this.cvList.get(0);
-        assertTrue(cv.getAccession().equals("CV1"));
+        assertEquals("CV1", cv.getAccession());
         cv = this.cvList.get(3);
-        assertTrue(cv.getAccession().equals("CV4"));
+        assertEquals("CV4", cv.getAccession());
 
     }
 
@@ -127,7 +127,7 @@ public class FacadeListTest {
     @Test
     public void testGetAtIndexOutOfBounds() {
         CvParam cv = this.cvList.get(0);
-        assertTrue(cv.getAccession().equals("CV1"));
+        assertEquals("CV1", cv.getAccession());
         try {
             cv = this.cvList.get(4);
         } catch (Exception e) {
@@ -166,7 +166,7 @@ public class FacadeListTest {
         CvParam cv = cvList.get(2);
         int index = cvList.indexOf(cv);
 
-        assertTrue(index == 2);
+        assertEquals(2, index);
     }
 
     @Test(expected = NullPointerException.class)
@@ -198,7 +198,7 @@ public class FacadeListTest {
     @Test
     public void testSubList() throws Exception {
         List<CvParam> sublist = cvList.subList(1, 3);
-        assertTrue(sublist.size() == 2);
+        assertEquals(2, sublist.size());
     }
 
     /**
@@ -209,8 +209,8 @@ public class FacadeListTest {
     @Test
     public void testSubListCheckValue() throws Exception {
         List<CvParam> sublist = cvList.subList(1, 3);
-        assertTrue(sublist.get(0).getAccession().equals("CV2"));
-        Assert.assertTrue(sublist.get(1).getAccession().equals("CV3"));
+        assertEquals("CV2", sublist.get(0).getAccession());
+        Assert.assertEquals("CV3", sublist.get(1).getAccession());
     }
 
     @Test(expected = UnsupportedOperationException.class)
@@ -234,7 +234,7 @@ public class FacadeListTest {
     @Test
     public void testSubListToLastELement() throws Exception {
         List<CvParam> sublist = cvList.subList(1, 4);
-        Assert.assertTrue(sublist.size() == 3);
+        Assert.assertEquals(3, sublist.size());
     }
 
     @Test
@@ -244,7 +244,7 @@ public class FacadeListTest {
         cv.setAccession("New CV2");
 
         CvParam cv1 = cvList.get(1);
-        Assert.assertTrue(cv1.getAccession().equals("New CV2"));
+        Assert.assertEquals("New CV2", cv1.getAccession());
     }
 
     /**
@@ -255,7 +255,7 @@ public class FacadeListTest {
     @Test
     public void testToArray() throws Exception {
         Object[] arr = cvList.toArray();
-        Assert.assertTrue(arr.length == 4);
+        Assert.assertEquals(4, arr.length);
     }
 
     /**
@@ -268,7 +268,7 @@ public class FacadeListTest {
         Object[] arr = cvList.toArray();
         CvParam cv = (CvParam) arr[0];
         cv.setAccession("CV12");
-        Assert.assertTrue(cvList.get(0).getAccession().equals("CV12"));
+        Assert.assertEquals("CV12", cvList.get(0).getAccession());
     }
 
     /**
@@ -283,7 +283,7 @@ public class FacadeListTest {
         CvParam cv = new CvParam();
         cv.setAccession("CV12");
         arr[0] = cv;
-        Assert.assertTrue(cvList.get(0).getAccession().equals("CV1"));
+        Assert.assertEquals("CV1", cvList.get(0).getAccession());
     }
 
 
@@ -318,9 +318,9 @@ public class FacadeListTest {
         cvParams[5] = cv;
 
         CvParam[] returnedArray = this.cvList.toArray(cvParams);
-        assertTrue(returnedArray[0].getAccession().equals("CV1"));
-        assertTrue(returnedArray[4] == null);
-        assertTrue(returnedArray[5].getAccession().equals("newCV6"));
+        assertEquals("CV1", returnedArray[0].getAccession());
+        assertNull(returnedArray[4]);
+        assertEquals("newCV6", returnedArray[5].getAccession());
 
     }
 
@@ -329,7 +329,7 @@ public class FacadeListTest {
         CvParam[] cvParams = new CvParam[5];
         CvParam[] returnedParams = this.cvList.toArray(cvParams);
         returnedParams[0].setAccession("newCV1");
-        assertTrue(this.cvList.get(0).getAccession().equals(("newCV1")));
+        assertEquals(("newCV1"), this.cvList.get(0).getAccession());
     }
 
     @Test
@@ -339,7 +339,7 @@ public class FacadeListTest {
         CvParam newCvParam = new CvParam();
         newCvParam.setAccession("newCV1");
         returnedParams[0] = newCvParam;
-        assertTrue(this.cvList.get(0).getAccession().equals(("CV1")));
+        assertEquals(("CV1"), this.cvList.get(0).getAccession());
     }
 
 
@@ -347,16 +347,16 @@ public class FacadeListTest {
     public void testToArrayProvidingArray() throws Exception {
         CvParam[] cvParams = new CvParam[5];
         CvParam[] returnedParams = this.cvList.toArray(cvParams);
-        assertTrue(returnedParams[0].getAccession().equals(("CV1")));
-        assertTrue(returnedParams[4] == null);
+        assertEquals(("CV1"), returnedParams[0].getAccession());
+        assertNull(returnedParams[4]);
     }
 
     @Test
     public void testToArrayProvidingSmallerArray() throws Exception {
         CvParam[] cvParams = new CvParam[1];
         CvParam[] returnedParams = this.cvList.toArray(cvParams);
-        assertTrue(returnedParams[0].getAccession().equals(("CV1")));
-        assertTrue(returnedParams.length == 4);
+        assertEquals(("CV1"), returnedParams[0].getAccession());
+        assertEquals(4, returnedParams.length);
     }
 
     @Test(expected = NullPointerException.class)
@@ -375,7 +375,7 @@ public class FacadeListTest {
     public void testRemove() throws Exception {
         CvParam cv = cvList.get(0);
         cvList.remove(cv);
-        assertTrue(!cvList.contains(cv));
+        assertFalse(cvList.contains(cv));
     }
 
     /**
@@ -406,13 +406,13 @@ public class FacadeListTest {
     public void testRemoveNewCvParam() throws Exception {
         CvParam cv = new CvParam();
         cv.setAccession("NewCV");
-        assertTrue(!cvList.remove(cv));
+        assertFalse(cvList.remove(cv));
     }
 
     /********************************** containsAll ***********************************/
     @Test
     public void testContainsAll() throws Exception {
-        List<CvParam> testList = new ArrayList<CvParam>();
+        List<CvParam> testList = new ArrayList<>();
         testList.add(this.cvList.get(0));
         testList.add(this.cvList.get(1));
         assertTrue(this.cvList.containsAll(testList));
@@ -420,7 +420,7 @@ public class FacadeListTest {
 
     @Test
     public void testContainsAllWithAdditionalCvParam() throws Exception {
-        List<CvParam> testList = new ArrayList<CvParam>();
+        List<CvParam> testList = new ArrayList<>();
         testList.add(this.cvList.get(0));
         testList.add(this.cvList.get(1));
         CvParam cv = new CvParam();
@@ -431,7 +431,7 @@ public class FacadeListTest {
 
     @Test(expected = NullPointerException.class)
     public void testContainsAllWithNull() throws Exception {
-        List<CvParam> testList = new ArrayList<CvParam>();
+        List<CvParam> testList = new ArrayList<>();
         testList.add(this.cvList.get(0));
         testList.add(this.cvList.get(1));
         testList.add(null);
@@ -457,15 +457,15 @@ public class FacadeListTest {
     @Test
     public void testClear() throws Exception {
         this.cvList.clear();
-        assertTrue(this.cvList.size() == 0);
-        assertTrue(this.paramList.size() == 3);
-        assertTrue(this.paramList.get(0).getName().equals("User1"));
+        assertEquals(0, this.cvList.size());
+        assertEquals(3, this.paramList.size());
+        assertEquals("User1", this.paramList.get(0).getName());
     }
 
     /******************************** addAll **********************************/
     @Test
     public void testAddAll() throws Exception {
-        List<CvParam> testList = new ArrayList<CvParam>();
+        List<CvParam> testList = new ArrayList<>();
         int prevCvListSize = this.cvList.size();
         int prevParamListSize = this.paramList.size();
         CvParam cv = new CvParam();
@@ -479,16 +479,16 @@ public class FacadeListTest {
         testList.add(cv);
         this.cvList.addAll(testList);
         // Confirm new size of sublist is correct
-        assertTrue((prevCvListSize + testList.size()) == this.cvList.size());
+        assertEquals((prevCvListSize + testList.size()), this.cvList.size());
         // Confirm last element in sublist is last new element added.
-        assertTrue(this.cvList.get(this.cvList.size()-1).getAccession().equals("newCV3"));
+        assertEquals("newCV3", this.cvList.get(this.cvList.size() - 1).getAccession());
         // Confirm param list size has changed also.
-        assertTrue(this.paramList.size() == (prevParamListSize+testList.size()));
+        assertEquals(this.paramList.size(), (prevParamListSize + testList.size()));
     }
 
     @Test(expected = NullPointerException.class)
     public void testAddAllWithNullElement() throws Exception {
-        List<CvParam> testList = new ArrayList<CvParam>();
+        List<CvParam> testList = new ArrayList<>();
         CvParam cv = new CvParam();
         cv.setAccession("newCV1");
         testList.add(cv);
@@ -499,7 +499,7 @@ public class FacadeListTest {
 
     @Test(expected = NullPointerException.class)
     public void testAddAllWithNullCollection() throws Exception {
-        List<CvParam> testList = new ArrayList<CvParam>();
+        List<CvParam> testList = new ArrayList<>();
         this.cvList.addAll(null);
     }
 
@@ -524,7 +524,7 @@ public class FacadeListTest {
         int originalSize = paramList.size();
         int originalSubListSize = cvList.size();
 
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
 
         CvParam cv1 = new CvParam();
         cv1.setAccession("NewCV1");
@@ -537,15 +537,15 @@ public class FacadeListTest {
         this.cvList.addAll(0, cvs);
 
         // check the size of the original list
-        assertTrue(paramList.size() == (originalSize + cvs.size()));
+        assertEquals(paramList.size(), (originalSize + cvs.size()));
         // check the size of the sub list
-        assertTrue(cvList.size() == (originalSubListSize + cvs.size()));
+        assertEquals(cvList.size(), (originalSubListSize + cvs.size()));
         // check the element is correct
         CvParam cv = cvList.get(0);
-        assertTrue(cv.getAccession().equals("NewCV1"));
+        assertEquals("NewCV1", cv.getAccession());
         // check the original starting element has been moved to the correct position
         cv = cvList.get(2);
-        assertTrue(cv.getAccession().equals("CV1"));
+        assertEquals("CV1", cv.getAccession());
     }
 
     /**
@@ -558,7 +558,7 @@ public class FacadeListTest {
         int originalSize = paramList.size();
         int originalSubListSize = cvList.size();
 
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
 
         CvParam cv1 = new CvParam();
         cv1.setAccession("NewCV1");
@@ -571,15 +571,15 @@ public class FacadeListTest {
         this.cvList.addAll(2, cvs);
 
         // check the size of the original list
-        assertTrue(paramList.size() == (originalSize + cvs.size()));
+        assertEquals(paramList.size(), (originalSize + cvs.size()));
         // check the size of the sub list
-        assertTrue(cvList.size() == (originalSubListSize + cvs.size()));
+        assertEquals(cvList.size(), (originalSubListSize + cvs.size()));
         // check the element is correct
         CvParam cv = cvList.get(2);
-        assertTrue(cv.getAccession().equals("NewCV1"));
+        assertEquals("NewCV1", cv.getAccession());
         // check the original starting element has been moved to the correct position
         cv = cvList.get(4);
-        assertTrue(cv.getAccession().equals("CV3"));
+        assertEquals("CV3", cv.getAccession());
     }
 
     /**
@@ -592,7 +592,7 @@ public class FacadeListTest {
         int originalSize = paramList.size();
         int originalSubListSize = cvList.size();
 
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
 
         CvParam cv1 = new CvParam();
         cv1.setAccession("NewCV1");
@@ -605,15 +605,15 @@ public class FacadeListTest {
         this.cvList.addAll(3, cvs);
 
         // check the size of the original list
-        assertTrue(paramList.size() == (originalSize + cvs.size()));
+        assertEquals(paramList.size(), (originalSize + cvs.size()));
         // check the size of the sub list
-        assertTrue(cvList.size() == (originalSubListSize + cvs.size()));
+        assertEquals(cvList.size(), (originalSubListSize + cvs.size()));
         // check the element is correct
         CvParam cv = cvList.get(3);
-        assertTrue(cv.getAccession().equals("NewCV1"));
+        assertEquals("NewCV1", cv.getAccession());
         // check the original starting element has been moved to the correct position
         cv = cvList.get(5);
-        assertTrue(cv.getAccession().equals("CV4"));
+        assertEquals("CV4", cv.getAccession());
     }
 
     /**
@@ -631,7 +631,7 @@ public class FacadeListTest {
      */
     @Test (expected = NullPointerException.class)
     public void testAddAllNullElement() throws Exception {
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
 
         CvParam cv1 = new CvParam();
         cv1.setAccession("NewCV1");
@@ -647,7 +647,7 @@ public class FacadeListTest {
      */
     @Test (expected = IndexOutOfBoundsException.class)
     public void testAddAllIllegalIndex() throws Exception {
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
 
         CvParam cv1 = new CvParam();
         cv1.setAccession("NewCV1");
@@ -681,18 +681,18 @@ public class FacadeListTest {
         int originalSize = paramList.size();
         int originalSubListSize = cvList.size();
 
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
         cvs.add(this.cvList.get(0));
         cvs.add(this.cvList.get(1));
         boolean success = this.cvList.removeAll(cvs);
         assertTrue(success);
         // check the size of the original list
-        assertTrue(paramList.size() == (originalSize - cvs.size()));
+        assertEquals(paramList.size(), (originalSize - cvs.size()));
         // check the size of the sub list
-        assertTrue(cvList.size() == (originalSubListSize - cvs.size()));
+        assertEquals(cvList.size(), (originalSubListSize - cvs.size()));
         // check the element is correct
         CvParam cv = cvList.get(0);
-        assertTrue(cv.getAccession().equals("CV3"));
+        assertEquals("CV3", cv.getAccession());
     }
 
     /**
@@ -705,7 +705,7 @@ public class FacadeListTest {
         int originalSize = paramList.size();
         int originalSubListSize = cvList.size();
 
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
         CvParam cv = new CvParam();
         cv.setAccession("NewCV1");
         cvs.add(cv);
@@ -713,14 +713,14 @@ public class FacadeListTest {
         cv.setAccession("NewCV2");
         cvs.add(cv);
         boolean success = this.cvList.removeAll(cvs);
-        assertTrue(!success);
+        assertFalse(success);
         // check the size of the original list
-        assertTrue(paramList.size() == originalSize);
+        assertEquals(paramList.size(), originalSize);
         // check the size of the sub list
-        assertTrue(cvList.size() == originalSubListSize);
+        assertEquals(cvList.size(), originalSubListSize);
         // check the element is correct
         cv = cvList.get(0);
-        assertTrue(cv.getAccession().equals("CV1"));
+        assertEquals("CV1", cv.getAccession());
 
     }
 
@@ -731,7 +731,7 @@ public class FacadeListTest {
 
     @Test(expected = NullPointerException.class)
     public void testRemoveAllNullElement() throws Exception{
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
         cvs.add(null);
         this.cvList.removeAll(cvs);
     }
@@ -742,8 +742,8 @@ public class FacadeListTest {
         int originalSize = this.paramList.size();
         int userSize = this.userList.size();
         cvs.add(this.userList.get(0));
-        assertTrue(originalSize == this.paramList.size());
-        assertTrue(userSize == this.userList.size());
+        assertEquals(originalSize, this.paramList.size());
+        assertEquals(userSize, this.userList.size());
         this.cvList.removeAll(cvs);
     }
 
@@ -754,18 +754,18 @@ public class FacadeListTest {
         int originalSize = paramList.size();
         int originalSubListSize = cvList.size();
 
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
         cvs.add(this.cvList.get(0));
         cvs.add(this.cvList.get(1));
         boolean success = this.cvList.retainAll(cvs);
         assertTrue(success);
         // check the size of the original list
-        assertTrue(paramList.size() == (originalSize - originalSubListSize + cvs.size()));
+        assertEquals(paramList.size(), (originalSize - originalSubListSize + cvs.size()));
         // check the size of the sub list
-        assertTrue(cvList.size() == cvs.size());
+        assertEquals(cvList.size(), cvs.size());
         // check the element is correct
         CvParam cv = cvList.get(0);
-        assertTrue(cv.getAccession().equals("CV1"));
+        assertEquals("CV1", cv.getAccession());
     }
 
     /**
@@ -778,7 +778,7 @@ public class FacadeListTest {
         int originalSize = paramList.size();
         int originalSubListSize = cvList.size();
 
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
         cvs.add(this.cvList.get(0));
         cvs.add(this.cvList.get(1));
         CvParam cv = new CvParam();
@@ -787,12 +787,12 @@ public class FacadeListTest {
         boolean success = this.cvList.retainAll(cvs);
         assertTrue(success);
         // check the size of the original list
-        assertTrue(paramList.size() == (originalSize - originalSubListSize + (cvs.size()-1)));
+        assertEquals(paramList.size(), (originalSize - originalSubListSize + (cvs.size() - 1)));
         // check the size of the sub list
-        assertTrue(cvList.size() == cvs.size()-1);
+        assertEquals(cvList.size(), cvs.size() - 1);
         // check the element is correct
         cv = cvList.get(0);
-        assertTrue(cv.getAccession().equals("CV1"));
+        assertEquals("CV1", cv.getAccession());
     }
 
     @Test(expected = NullPointerException.class)
@@ -802,7 +802,7 @@ public class FacadeListTest {
 
     @Test(expected = NullPointerException.class)
     public void testRetainAllNullElement() throws Exception{
-        Collection<CvParam> cvs = new ArrayList<CvParam>();
+        Collection<CvParam> cvs = new ArrayList<>();
         cvs.add(null);
         this.cvList.retainAll(cvs);
     }
@@ -819,8 +819,8 @@ public class FacadeListTest {
         int originalSize = this.paramList.size();
         int userSize = this.userList.size();
         cvs.add(this.userList.get(0));
-        assertTrue(originalSize == this.paramList.size());
-        assertTrue(userSize == this.userList.size());
+        assertEquals(originalSize, this.paramList.size());
+        assertEquals(userSize, this.userList.size());
         this.cvList.retainAll(cvs);
     }
 
@@ -840,37 +840,37 @@ public class FacadeListTest {
     /*********************************** equals ************************************/
     @Test
     public void testEquals() throws Exception{
-        assertTrue(this.cvList.equals(this.cvList));
+        assertEquals(this.cvList, this.cvList);
     }
 
     @Test
     public void testNotEquals() throws Exception{
-        assertTrue(!this.cvList.equals(this.paramList));
+        assertFalse(this.cvList.equals(this.paramList));
     }
 
     @Test
     public void testEqualsSameCvParamDiffList() throws Exception{
-        List<AbstractParam> newParamList = new ArrayList<AbstractParam>(paramList.size());
+        List<AbstractParam> newParamList = new ArrayList<>(paramList.size());
         newParamList.addAll(paramList);
-        FacadeList<CvParam> newCvList = new FacadeList<CvParam>(newParamList, CvParam.class);
-        assertTrue(this.cvList.equals(newCvList));
+        FacadeList<CvParam> newCvList = new FacadeList<>(newParamList, CvParam.class);
+        assertEquals(this.cvList, newCvList);
     }
 
     @Test
     public void testEqualsSameCvParamDiffUserParamOrder() throws Exception{
-        List<AbstractParam> newParamList = new ArrayList<AbstractParam>(paramList.size());
+        List<AbstractParam> newParamList = new ArrayList<>(paramList.size());
         newParamList.addAll(paramList);
         UserParam userParam = this.userList.get(0);
         this.userList.set(1, userParam);
-        FacadeList<CvParam> newCvList = new FacadeList<CvParam>(newParamList, CvParam.class);
-        assertTrue(this.cvList.equals(newCvList));
+        FacadeList<CvParam> newCvList = new FacadeList<>(newParamList, CvParam.class);
+        assertEquals(this.cvList, newCvList);
     }
 
     /********************************* hashcode *************************************/
 
     @Test
     public void testHashCode() throws Exception{
-        assertTrue(this.cvList.hashCode() == this.cvList.hashCode());
+        assertEquals(this.cvList.hashCode(), this.cvList.hashCode());
     }
 
     @Test
@@ -879,17 +879,17 @@ public class FacadeListTest {
         CvParam cv = new CvParam();
         cv.setAccession("newCV1");
         this.cvList.add(cv);
-        assertFalse(originalHashCode == this.cvList.hashCode());
+        assertNotEquals(originalHashCode, this.cvList.hashCode());
     }
 
     @Test
     public void testHashCodeWithPositionModifiedUserParamsElements() throws Exception{
-        List<AbstractParam> newParamList = new ArrayList<AbstractParam>(paramList.size());
+        List<AbstractParam> newParamList = new ArrayList<>(paramList.size());
         newParamList.addAll(paramList);
         UserParam userParam = this.userList.get(0);
         this.userList.set(1, userParam);
-        FacadeList<CvParam> newCvList = new FacadeList<CvParam>(newParamList, CvParam.class);
-        assertTrue(this.cvList.hashCode() == newCvList.hashCode());
+        FacadeList<CvParam> newCvList = new FacadeList<>(newParamList, CvParam.class);
+        assertEquals(this.cvList.hashCode(), newCvList.hashCode());
     }
 
     @Test
@@ -899,6 +899,6 @@ public class FacadeListTest {
         CvParam cv2 = this.cvList.get(1);
         this.cvList.set(0, cv2);
         this.cvList.set(1, cv);
-        assertFalse(this.cvList.hashCode() == originalHashCode);
+        assertNotEquals(this.cvList.hashCode(), originalHashCode);
     }
 }

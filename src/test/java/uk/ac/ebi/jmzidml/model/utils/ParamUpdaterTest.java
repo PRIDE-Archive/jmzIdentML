@@ -56,7 +56,7 @@ public class ParamUpdaterTest {
     @Test
     public void testSubListClassing() throws IllegalAccessException, InstantiationException {
 
-        List<CvParam> list = new ArrayList<CvParam>();
+        List<CvParam> list = new ArrayList<>();
         list.add(param1);
         list.add(param2);
         // not sub-classed yet

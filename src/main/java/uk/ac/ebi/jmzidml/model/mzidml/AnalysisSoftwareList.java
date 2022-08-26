@@ -70,7 +70,7 @@ public class AnalysisSoftwareList
      */
     public List<AnalysisSoftware> getAnalysisSoftware() {
         if (analysisSoftware == null) {
-            analysisSoftware = new ArrayList<AnalysisSoftware>();
+            analysisSoftware = new ArrayList<>();
         }
         return this.analysisSoftware;
     }

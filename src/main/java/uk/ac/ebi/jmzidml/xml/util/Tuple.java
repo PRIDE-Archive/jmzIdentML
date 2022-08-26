@@ -1,6 +1,7 @@
 package uk.ac.ebi.jmzidml.xml.util;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author Yasset Perez-Riverol (ypriverol@gmail.com)
@@ -38,7 +39,7 @@ public class Tuple <K, V> implements Serializable {
 
         Tuple tuple = (Tuple) o;
 
-        return !(key != null ? !key.equals(tuple.key) : tuple.key != null) && !(value != null ? !value.equals(tuple.value) : tuple.value != null);
+        return !(!Objects.equals(key, tuple.key)) && !(!Objects.equals(value, tuple.value));
 
     }
 

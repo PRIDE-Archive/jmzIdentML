@@ -333,7 +333,7 @@ public class MzIdentML
      */
     public List<BibliographicReference> getBibliographicReference() {
         if (bibliographicReference == null) {
-            bibliographicReference = new ArrayList<BibliographicReference>();
+            bibliographicReference = new ArrayList<>();
         }
         return this.bibliographicReference;
     }

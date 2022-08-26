@@ -12,7 +12,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 import static junit.framework.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,7 +26,7 @@ public class FacadeListIteratorTest {
 
     @Before
     public void setUp() throws Exception {
-        List<AbstractParam> paramList = new ArrayList<AbstractParam>();
+        List<AbstractParam> paramList = new ArrayList<>();
 
         CvParam cv = new CvParam();
         cv.setAccession("CV1");
@@ -56,7 +56,7 @@ public class FacadeListIteratorTest {
         user2.setName("User3");
         paramList.add(user2);
 
-        cvList = new FacadeList<CvParam>(paramList, CvParam.class);
+        cvList = new FacadeList<>(paramList, CvParam.class);
     }
 
     /**************************** Test hasNext() *********************************/
@@ -102,7 +102,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator();
         CvParam cv = it.next();
         System.out.println("CV Accession: " + cv.getAccession());
-        assertTrue(cv.getAccession().equals("CV1"));
+        assertEquals("CV1", cv.getAccession());
     }
 
     /**
@@ -114,7 +114,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator(1);
         CvParam cv = it.next();
         System.out.println("Cv Accession:" + cv.getAccession());
-        assertTrue(cv.getAccession().equals("CV2"));
+        assertEquals("CV2", cv.getAccession());
     }
 
     /**
@@ -126,7 +126,7 @@ public class FacadeListIteratorTest {
     public void testListIteratorLastNextWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(3);
         CvParam cv = it.next();
-        assertTrue(cv.getAccession().equals("CV4"));
+        assertEquals("CV4", cv.getAccession());
     }
 
 
@@ -152,7 +152,7 @@ public class FacadeListIteratorTest {
     @Test
     public void testListIteratorHasNoPrevious() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
-        assertTrue(!it.hasPrevious());
+        assertFalse(it.hasPrevious());
     }
 
     /**
@@ -164,7 +164,7 @@ public class FacadeListIteratorTest {
     @Test
     public void testListIteratorHasPreviousWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
-        assertTrue(!it.hasPrevious());
+        assertFalse(it.hasPrevious());
         it.next();
         assertTrue(it.hasPrevious());
     }
@@ -189,7 +189,7 @@ public class FacadeListIteratorTest {
         it.next();
         CvParam cv = it.previous();
         assertNotNull(cv);
-        assertTrue(cv.getAccession().equals("CV1"));
+        assertEquals("CV1", cv.getAccession());
     }
 
     /**
@@ -211,7 +211,7 @@ public class FacadeListIteratorTest {
     public void testNextIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
         int nextIndex = it.nextIndex();
-        assertTrue(nextIndex == 0);
+        assertEquals(0, nextIndex);
     }
 
     /**
@@ -222,7 +222,7 @@ public class FacadeListIteratorTest {
     public void testNextIndexWithIndex() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(2);
         int nextIndex = it.nextIndex();
-        assertTrue(nextIndex == 0);
+        assertEquals(0, nextIndex);
     }
 
     /**
@@ -233,7 +233,7 @@ public class FacadeListIteratorTest {
     public void testNextIndexWithIndexEnd() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(3);
         int nextIndex = it.nextIndex();
-        assertTrue(nextIndex == 0);
+        assertEquals(0, nextIndex);
     }
 
     /**
@@ -246,7 +246,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator(3);
         it.next();
         int nextIndex = it.nextIndex();
-        assertTrue(nextIndex == 1);
+        assertEquals(1, nextIndex);
     }
 
 
@@ -260,7 +260,7 @@ public class FacadeListIteratorTest {
         it.next();
         it.next();
         int previousIndex = it.previousIndex();
-        assertTrue(previousIndex == 2);
+        assertEquals(2, previousIndex);
     }
 
     /**
@@ -271,7 +271,7 @@ public class FacadeListIteratorTest {
     public void testPreviousIndexWithOutNext() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator();
         int previousIndex = it.previousIndex();
-        assertTrue(previousIndex == -1);
+        assertEquals(-1, previousIndex);
     }
 
     /**
@@ -284,7 +284,7 @@ public class FacadeListIteratorTest {
         it.next();
         it.next();
         int previousIndex = it.previousIndex();
-        assertTrue(previousIndex == 1);
+        assertEquals(1, previousIndex);
     }
 
     /**
@@ -296,7 +296,7 @@ public class FacadeListIteratorTest {
     public void testPreviousIndexWithoutNext() throws Exception {
         ListIterator<CvParam> it = cvList.listIterator(1);
         int previousIndex = it.previousIndex();
-        assertTrue(previousIndex == -1);
+        assertEquals(-1, previousIndex);
     }
 
     /**
@@ -309,7 +309,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator(3);
         it.next();
         int previousIndex = it.previousIndex();
-        assertTrue(previousIndex == 0);
+        assertEquals(0, previousIndex);
     }
 
     /**
@@ -324,7 +324,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator();
         it.next();
         it.remove();
-        assertTrue(it.next().getAccession().equals("CV2"));
+        assertEquals("CV2", it.next().getAccession());
     }
 
     /**
@@ -338,7 +338,7 @@ public class FacadeListIteratorTest {
         it.next();
         it.previous();
         it.remove();
-        assertTrue(it.next().getAccession().equals("CV2"));
+        assertEquals("CV2", it.next().getAccession());
     }
 
     /**
@@ -351,7 +351,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator(1);
         it.next();
         it.remove();
-        assertTrue(it.next().getAccession().equals("CV3"));
+        assertEquals("CV3", it.next().getAccession());
     }
 
     /**
@@ -365,7 +365,7 @@ public class FacadeListIteratorTest {
         it.previous();
         it.remove();
         CvParam cv = it.next();
-        assertTrue(cv.getAccession().equals("CV3"));
+        assertEquals("CV3", cv.getAccession());
     }
 
     /**
@@ -381,7 +381,7 @@ public class FacadeListIteratorTest {
         it.next();
         it.remove();
         CvParam cv = it.previous();
-        assertTrue(cv.getAccession().equals("CV3"));
+        assertEquals("CV3", cv.getAccession());
     }
 
     /**
@@ -397,7 +397,7 @@ public class FacadeListIteratorTest {
         it.next();
         it.remove();
         CvParam cv = it.next();
-        assertTrue(cv.getAccession().equals("CV3"));
+        assertEquals("CV3", cv.getAccession());
     }
 
     /**
@@ -410,7 +410,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator();
         it.next();
         it.remove();
-        assertTrue(it.nextIndex() == 0);
+        assertEquals(0, it.nextIndex());
     }
 
     /**
@@ -422,7 +422,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator();
         it.next();
         it.remove();
-        assertTrue(it.previousIndex() == -1);
+        assertEquals(-1, it.previousIndex());
     }
 
     /**
@@ -435,7 +435,7 @@ public class FacadeListIteratorTest {
         it.next();
         it.next();
         it.remove();
-        assertTrue(it.nextIndex() == 1);
+        assertEquals(1, it.nextIndex());
     }
 
     /**
@@ -448,7 +448,7 @@ public class FacadeListIteratorTest {
         it.next();
         it.next();
         it.remove();
-        assertTrue(it.previousIndex() == 0);
+        assertEquals(0, it.previousIndex());
     }
 
     /**
@@ -463,7 +463,7 @@ public class FacadeListIteratorTest {
         it.next();
         it.next();
         it.remove();
-        assertTrue(it.nextIndex() == 3);
+        assertEquals(3, it.nextIndex());
     }
 
     /**
@@ -478,7 +478,7 @@ public class FacadeListIteratorTest {
         it.next();
         it.next();
         it.remove();
-        assertTrue(it.previousIndex() == 2);
+        assertEquals(2, it.previousIndex());
     }
 
     /**
@@ -490,7 +490,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator(2);
         it.next();
         it.remove();
-        assertTrue(it.nextIndex() == 0);
+        assertEquals(0, it.nextIndex());
     }
 
     /**
@@ -502,7 +502,7 @@ public class FacadeListIteratorTest {
         ListIterator<CvParam> it = cvList.listIterator(2);
         it.next();
         it.remove();
-        assertTrue(it.previousIndex() == -1);
+        assertEquals(-1, it.previousIndex());
     }
 
     /**
@@ -521,7 +521,7 @@ public class FacadeListIteratorTest {
         cv.setAccession("addedCV1");
         it.add(cv);
         cv = it.next();
-        assertTrue(cv.getAccession().equals("addedCV1"));
+        assertEquals("addedCV1", cv.getAccession());
     }
 
     /**
@@ -535,7 +535,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("addedCV1");
         it.add(cv);
-        assertTrue(it.nextIndex() == 0);
+        assertEquals(0, it.nextIndex());
     }
 
     /**
@@ -549,7 +549,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("addedCV1");
         it.add(cv);
-        assertTrue(it.previousIndex() == -1);
+        assertEquals(-1, it.previousIndex());
     }
 
 
@@ -565,7 +565,7 @@ public class FacadeListIteratorTest {
         cv.setAccession("addedCV1");
         it.add(cv);
         cv = it.next();
-        assertTrue(cv.getAccession().equals("addedCV1"));
+        assertEquals("addedCV1", cv.getAccession());
     }
 
     /**
@@ -608,7 +608,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("addedCV1");
         it.add(cv);
-        assertTrue(it.nextIndex() == 0);
+        assertEquals(0, it.nextIndex());
     }
 
     /**
@@ -622,7 +622,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("addedCV1");
         it.add(cv);
-        assertTrue(it.previousIndex() == -1);
+        assertEquals(-1, it.previousIndex());
     }
 
     /**
@@ -641,7 +641,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.previous().getAccession().equals("setCV1"));
+        assertEquals("setCV1", it.previous().getAccession());
     }
 
     /**
@@ -657,7 +657,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.next().getAccession().equals("CV2"));
+        assertEquals("CV2", it.next().getAccession());
     }
 
     /**
@@ -673,7 +673,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.next().getAccession().equals("setCV1"));
+        assertEquals("setCV1", it.next().getAccession());
     }
 
 
@@ -690,8 +690,8 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.next().getAccession().equals("setCV1"));
-        assertTrue(it.next().getAccession().equals("CV4"));
+        assertEquals("setCV1", it.next().getAccession());
+        assertEquals("CV4", it.next().getAccession());
     }
 
     /**
@@ -708,7 +708,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.previous().getAccession().equals("setCV1"));
+        assertEquals("setCV1", it.previous().getAccession());
     }
 
     /**
@@ -724,7 +724,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(!it.hasNext());
+        assertFalse(it.hasNext());
     }
 
     /**
@@ -755,7 +755,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.previous().getAccession().equals("setCV1"));
+        assertEquals("setCV1", it.previous().getAccession());
     }
 
     /**
@@ -771,7 +771,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.next().getAccession().equals("CV4"));
+        assertEquals("CV4", it.next().getAccession());
     }
 
     /**
@@ -786,7 +786,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.nextIndex() == 1);
+        assertEquals(1, it.nextIndex());
     }
 
     /**
@@ -801,7 +801,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.previousIndex() == 0);
+        assertEquals(0, it.previousIndex());
     }
 
     /**
@@ -817,7 +817,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.nextIndex() == 1);
+        assertEquals(1, it.nextIndex());
     }
 
     /**
@@ -833,7 +833,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.previousIndex() == 0);
+        assertEquals(0, it.previousIndex());
     }
 
     /**
@@ -850,7 +850,7 @@ public class FacadeListIteratorTest {
         CvParam cv = new CvParam();
         cv.setAccession("setCV1");
         it.set(cv);
-        assertTrue(it.previous().getAccession().equals("setCV1"));
+        assertEquals("setCV1", it.previous().getAccession());
     }
 
     /**
@@ -885,7 +885,7 @@ public class FacadeListIteratorTest {
         cv.setAccession("setCV1");
         it.set(cv);
         cv = it.next();
-        assertTrue(cv.getAccession().equals("CV4"));
+        assertEquals("CV4", cv.getAccession());
     }
 
     /**
@@ -897,7 +897,7 @@ public class FacadeListIteratorTest {
         List superlist = new ArrayList();
         FacadeList list = new FacadeList(superlist, CvParam.class);
         ListIterator it = list.listIterator();
-        assertTrue(!it.hasNext());
+        assertFalse(it.hasNext());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -913,7 +913,7 @@ public class FacadeListIteratorTest {
         List superlist = new ArrayList();
         FacadeList list = new FacadeList(superlist, CvParam.class);
         ListIterator it = list.listIterator();
-        assertTrue(!it.hasPrevious());
+        assertFalse(it.hasPrevious());
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -930,7 +930,7 @@ public class FacadeListIteratorTest {
         FacadeList list = new FacadeList(superlist, CvParam.class);
         ListIterator it = list.listIterator();
         int nextIndex = it.nextIndex();
-        assertTrue(nextIndex == 0);
+        assertEquals(0, nextIndex);
     }
 
     @Test
@@ -939,7 +939,7 @@ public class FacadeListIteratorTest {
         FacadeList list = new FacadeList(superlist, CvParam.class);
         ListIterator it = list.listIterator();
         int previousIndex = it.previousIndex();
-        assertTrue(previousIndex == -1);
+        assertEquals(-1, previousIndex);
     }
 /*
     @Test
@@ -1008,6 +1008,6 @@ public class FacadeListIteratorTest {
      * test multiple removes
      */
     public void testMultipleRemoves() throws Exception{
-        assertTrue(false);
+        fail();
     }
 }

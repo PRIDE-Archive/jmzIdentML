@@ -86,10 +86,10 @@ public class AuditCollectionTest extends TestCase {
         AuditCollection ac = aci.next();
         assertNotNull(ac);
         List<AbstractContact> personOrOrganization = ac.getPersonOrOrganization();
-        assertTrue(personOrOrganization.size() == 4);
+        assertEquals(4, personOrOrganization.size());
         List<Person> personList = ac.getPerson();
-        assertTrue(personList.size() ==2);
+        assertEquals(2, personList.size());
         List<Organization> orgList = ac.getOrganization();
-        assertTrue(orgList.size() ==2);
+        assertEquals(2, orgList.size());
     }
 }

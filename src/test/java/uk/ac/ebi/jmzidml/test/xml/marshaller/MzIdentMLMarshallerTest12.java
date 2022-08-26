@@ -12,14 +12,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.Iterator;
-
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
 
 import java.io.FileOutputStream;
 
 import uk.ac.ebi.jmzidml.model.utils.MzIdentMLVersion;
+
+import static junit.framework.Assert.*;
 
 /**
  * This test is not run automatically, since it only creates a mzIdentML output file.
@@ -52,11 +52,8 @@ public class MzIdentMLMarshallerTest12 {
         MzIdentMLMarshaller m = new MzIdentMLMarshaller(MzIdentMLVersion.Version_1_2);
         assertNotNull(m);
         File outputFile =  File.createTempFile("output", ".xml");
-        FileWriter writer = null;
-        try {
+        try (FileWriter writer = new FileWriter(outputFile)) {
 
-            writer = new FileWriter(outputFile);
-            
             // mzIdentML
             //     cvList
             //     AnalysisSoftwareList
@@ -184,27 +181,24 @@ public class MzIdentMLMarshallerTest12 {
             writer.write(m.createMzIdentMLClosingTag());
             writer.flush();
 
-        } finally {
-            if (writer != null) writer.close();
         }
         unmarshaller = new MzIdentMLUnmarshaller(outputFile);
         MzIdentML mzIdentMl = unmarshaller.unmarshal(MzIdentMLElement.MzIdentML);
 
         //Do some shallow testing. Confirm correct number of child elements returned for each tested element.
 
-        assertTrue(mzIdentMl.getId().equals("12345"));
+        assertEquals("12345", mzIdentMl.getId());
         assertTrue(cvCount >= 0);
-        assertTrue(mzIdentMl.getCvList().getCv().size() == cvCount);
+        assertEquals(mzIdentMl.getCvList().getCv().size(), cvCount);
         assertTrue(analysisSoftwareCount >= 0);
-        assertTrue(mzIdentMl.getAnalysisSoftwareList().getAnalysisSoftware().size() == analysisSoftwareCount);
-        assertTrue(mzIdentMl.getProvider().getId().equals("PROVIDER"));
+        assertEquals(mzIdentMl.getAnalysisSoftwareList().getAnalysisSoftware().size(), analysisSoftwareCount);
+        assertEquals("PROVIDER", mzIdentMl.getProvider().getId());
         assertTrue(auditCount >= 0);
-        assertTrue(mzIdentMl.getAuditCollection().getPersonOrOrganization().size() == auditCount);
+        assertEquals(mzIdentMl.getAuditCollection().getPersonOrOrganization().size(), auditCount);
         assertTrue(dbSequenceCount >= 0);
-        assertTrue(mzIdentMl.getSequenceCollection().getDBSequence().size() == dbSequenceCount);
+        assertEquals(mzIdentMl.getSequenceCollection().getDBSequence().size(), dbSequenceCount);
         assertTrue(peptideEvidencePeptideCount >= 0);
-        assertTrue(mzIdentMl.getSequenceCollection().getPeptideEvidence().size()
-                == peptideEvidencePeptideCount);
+        assertEquals(mzIdentMl.getSequenceCollection().getPeptideEvidence().size(), peptideEvidencePeptideCount);
         outputFile.deleteOnExit();
     }
 
@@ -243,7 +237,7 @@ public class MzIdentMLMarshallerTest12 {
         
         MzIdentMLMarshaller marshaller = new MzIdentMLMarshaller(MzIdentMLVersion.Version_1_2);
         File outputFile = File.createTempFile("output2", ".xml");
-        marshaller.marshal(mzIdentML, new FileOutputStream(outputFile));
+        marshaller.marshal(mzIdentML, Files.newOutputStream(outputFile.toPath()));
         outputFile.deleteOnExit();
 
     }

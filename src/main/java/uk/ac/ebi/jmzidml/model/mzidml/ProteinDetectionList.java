@@ -79,7 +79,7 @@ public class ProteinDetectionList
      */
     public List<ProteinAmbiguityGroup> getProteinAmbiguityGroup() {
         if (proteinAmbiguityGroup == null) {
-            proteinAmbiguityGroup = new ArrayList<ProteinAmbiguityGroup>();
+            proteinAmbiguityGroup = new ArrayList<>();
         }
         return this.proteinAmbiguityGroup;
     }
@@ -109,16 +109,16 @@ public class ProteinDetectionList
      */
     public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<AbstractParam>();
+            paramGroup = new ArrayList<>();
         }
         return this.paramGroup;
     }
 
     public List<CvParam> getCvParam() {
-        return new FacadeList<CvParam>(this.getParamGroup(), CvParam.class);
+        return new FacadeList<>(this.getParamGroup(), CvParam.class);
     }
 
     public List<UserParam> getUserParam() {
-        return new FacadeList<UserParam>(this.getParamGroup(), UserParam.class);
+        return new FacadeList<>(this.getParamGroup(), UserParam.class);
     }
 }

@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,7 +26,7 @@ public class FacadeIteratorTest {
 
     @Before
     public void setUp() throws Exception {
-        List<AbstractParam> paramList = new ArrayList<AbstractParam>();
+        List<AbstractParam> paramList = new ArrayList<>();
 
         CvParam cv = new CvParam();
         cv.setAccession("CV1");
@@ -56,7 +56,7 @@ public class FacadeIteratorTest {
         user2.setName("User3");
         paramList.add(user2);
 
-        cvList = new FacadeList<CvParam>(paramList, CvParam.class);
+        cvList = new FacadeList<>(paramList, CvParam.class);
     }
 
     /**
@@ -84,7 +84,7 @@ public class FacadeIteratorTest {
         } catch (NoSuchElementException e) {
             assertTrue(true);
         } catch (Exception e) {
-            assertTrue(false);
+            fail();
         }
 
     }
@@ -98,7 +98,7 @@ public class FacadeIteratorTest {
 
         // remove the first cv param
         CvParam cv = cvIter.next();
-        assertTrue(cv.getAccession().equals("CV1"));
+        assertEquals("CV1", cv.getAccession());
     }
 
     /**
@@ -111,7 +111,7 @@ public class FacadeIteratorTest {
         cvIter.next();
         cvIter.remove();
         CvParam cv = cvIter.next();
-        assertTrue(cv.getAccession().equals("CV3"));
+        assertEquals("CV3", cv.getAccession());
     }
 
     /**
@@ -128,7 +128,7 @@ public class FacadeIteratorTest {
         cvIter.next();
         cvIter.next();
         CvParam cv = cvIter.next();
-        assertTrue(cv.getAccession().equals("CV4"));
+        assertEquals("CV4", cv.getAccession());
 
         // remove one element
         cvList.remove(cv);
@@ -136,7 +136,7 @@ public class FacadeIteratorTest {
         // get next
         try {
             cv = cvIter.next();
-            assertTrue(false);
+            fail();
         } catch (Exception ex) {
             assertTrue(ex instanceof NoSuchElementException);
         }
@@ -156,7 +156,7 @@ public class FacadeIteratorTest {
         cv.setAccession("New Cv 1");
         cvList.add(1, cv);
 
-        assertTrue(cvs.next().getAccession().equals("CV3"));
+        assertEquals("CV3", cvs.next().getAccession());
     }
 
     @Test
@@ -170,11 +170,11 @@ public class FacadeIteratorTest {
         cv.setAccession("New Cv 4");
         cvList.add(3, cv);
 
-        assertTrue(cvs.next().getAccession().equals("CV3"));
+        assertEquals("CV3", cvs.next().getAccession());
 
-        assertTrue(cvs.next().getAccession().equals("New Cv 4"));
+        assertEquals("New Cv 4", cvs.next().getAccession());
 
-        assertTrue(cvs.next().getAccession().equals("CV4"));
+        assertEquals("CV4", cvs.next().getAccession());
     }
 
     /**
@@ -186,7 +186,7 @@ public class FacadeIteratorTest {
     public void testForEach() throws Exception {
         for (Object o : this.cvList) {
             if (!(o instanceof CvParam)) {
-                assertTrue(false);
+                fail();
             }
         }
     }

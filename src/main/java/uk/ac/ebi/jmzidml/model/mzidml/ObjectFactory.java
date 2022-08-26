@@ -615,7 +615,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://psidev.info/psi/pi/mzIdentML/1.1", name = "MzIdentML")
     public JAXBElement<MzIdentML> createMzIdentML(MzIdentML value) {
-        return new JAXBElement<MzIdentML>(_MzIdentML_QNAME, MzIdentML.class, null, value);
+        return new JAXBElement<>(_MzIdentML_QNAME, MzIdentML.class, null, value);
     }
 
 }

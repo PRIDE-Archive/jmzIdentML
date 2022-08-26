@@ -113,7 +113,7 @@ public class ProteinDetection
      */
     public List<InputSpectrumIdentifications> getInputSpectrumIdentifications() {
         if (inputSpectrumIdentifications == null) {
-            inputSpectrumIdentifications = new ArrayList<InputSpectrumIdentifications>();
+            inputSpectrumIdentifications = new ArrayList<>();
         }
         return this.inputSpectrumIdentifications;
     }

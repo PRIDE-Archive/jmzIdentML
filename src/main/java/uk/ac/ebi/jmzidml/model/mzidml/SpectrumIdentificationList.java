@@ -111,7 +111,7 @@ public class SpectrumIdentificationList
      */
     public List<SpectrumIdentificationResult> getSpectrumIdentificationResult() {
         if (spectrumIdentificationResult == null) {
-            spectrumIdentificationResult = new ArrayList<SpectrumIdentificationResult>();
+            spectrumIdentificationResult = new ArrayList<>();
         }
         return this.spectrumIdentificationResult;
     }
@@ -141,7 +141,7 @@ public class SpectrumIdentificationList
      */
     public List<AbstractParam> getParamGroup() {
         if (paramGroup == null) {
-            paramGroup = new ArrayList<AbstractParam>();
+            paramGroup = new ArrayList<>();
         }
         return this.paramGroup;
     }

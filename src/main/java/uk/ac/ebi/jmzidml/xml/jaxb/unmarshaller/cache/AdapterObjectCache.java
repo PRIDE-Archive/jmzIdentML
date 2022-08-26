@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class AdapterObjectCache implements MzIdentMLObjectCache {
 
-    private HashMap<Class, HashMap<String, MzIdentMLObject>> cache = new HashMap<Class, HashMap<String, MzIdentMLObject>>();
+    private HashMap<Class, HashMap<String, MzIdentMLObject>> cache = new HashMap<>();
 
     /**
      * Stores the Object in a in-memory Map.
@@ -33,11 +33,7 @@ public class AdapterObjectCache implements MzIdentMLObjectCache {
         Class cls = object.getClass();
         MzIdentMLElement element = MzIdentMLElement.getType(cls);
         if ( element.isCached() ) {
-            HashMap<String, MzIdentMLObject> classCache = cache.get(cls);
-            if (classCache == null) {
-                classCache = new HashMap<String, MzIdentMLObject>();
-                cache.put(cls, classCache);
-            }
+            HashMap<String, MzIdentMLObject> classCache = cache.computeIfAbsent(cls, k -> new HashMap<>());
             //System.out.println("Element put in cache: " + object);
             classCache.put(id, object);
         } else {
@@ -83,7 +79,7 @@ public class AdapterObjectCache implements MzIdentMLObjectCache {
         if (map == null) {
             return null;
         }
-        List<T> retVal = new ArrayList<T>();
+        List<T> retVal = new ArrayList<>();
         for (MzIdentMLObject value : map.values()) {
             retVal.add((T)value);
         }

@@ -69,7 +69,7 @@ public class Fragmentation
      */
     public List<IonType> getIonType() {
         if (ionType == null) {
-            ionType = new ArrayList<IonType>();
+            ionType = new ArrayList<>();
         }
         return this.ionType;
     }

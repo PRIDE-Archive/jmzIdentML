@@ -75,7 +75,7 @@ public class MzIdentMLIndexerFactory {
         private XpathIndex index = null;
         private String mzIdentMLAttributeXMLString = null;
         // a unified cache of all the id maps
-        private Map<Class, Map<String, IndexElement>> idMapCache = new HashMap<Class, Map<String, IndexElement>>();
+        private Map<Class, Map<String, IndexElement>> idMapCache = new HashMap<>();
 
         ///// ///// ///// ///// ///// ///// ///// ///// ///// /////
         // Constructor
@@ -179,15 +179,15 @@ public class MzIdentMLIndexerFactory {
         }
 
         public List<IndexElement> getIndexElements(String xpath) {
-            return new ArrayList<IndexElement>(index.getElements(xpath));
+            return new ArrayList<>(index.getElements(xpath));
         }
 
         public Map<String, IndexElement> getIndexElements(Class clazz) {
-            return new HashMap<String, IndexElement>(idMapCache.get(clazz));
+            return new HashMap<>(idMapCache.get(clazz));
         }
 
         public Set<String> getXpath() {
-            return new HashSet<String>(index.getKeys());
+            return new HashSet<>(index.getKeys());
         }
 
         // ToDo: maybe generify to <T extends IdentifiableMzIdentMLObject>  Class<T>  ??
@@ -336,7 +336,7 @@ public class MzIdentMLIndexerFactory {
                     // so far so good, now generate the ID map (if not already present) and populate it
                     Map<String, IndexElement> map = idMapCache.get(element.getClazz());
                     if (map == null) {
-                        map = new HashMap<String, IndexElement>(index.getElements(element.getXpath()).size());
+                        map = new HashMap<>(index.getElements(element.getXpath()).size());
                         idMapCache.put(element.getClazz(), map);
                     }else{
                         logger.debug("This IdElement Map already exists");

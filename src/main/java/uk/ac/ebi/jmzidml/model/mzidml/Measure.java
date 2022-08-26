@@ -70,7 +70,7 @@ public class Measure
      */
     public List<CvParam> getCvParam() {
         if (cvParam == null) {
-            cvParam = new ArrayList<CvParam>();
+            cvParam = new ArrayList<>();
         }
         return this.cvParam;
     }

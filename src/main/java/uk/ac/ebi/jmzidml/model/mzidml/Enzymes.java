@@ -73,7 +73,7 @@ public class Enzymes
      */
     public List<Enzyme> getEnzyme() {
         if (enzyme == null) {
-            enzyme = new ArrayList<Enzyme>();
+            enzyme = new ArrayList<>();
         }
         return this.enzyme;
     }

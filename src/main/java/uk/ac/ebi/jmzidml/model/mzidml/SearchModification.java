@@ -83,7 +83,7 @@ public class SearchModification
      */
     public List<SpecificityRules> getSpecificityRules() {
         if (specificityRules == null) {
-            specificityRules = new ArrayList<SpecificityRules>();
+            specificityRules = new ArrayList<>();
         }
         return this.specificityRules;
     }
@@ -112,7 +112,7 @@ public class SearchModification
      */
     public List<CvParam> getCvParam() {
         if (cvParam == null) {
-            cvParam = new ArrayList<CvParam>();
+            cvParam = new ArrayList<>();
         }
         return this.cvParam;
     }
@@ -173,7 +173,7 @@ public class SearchModification
      */
     public List<String> getResidues() {
         if (residues == null) {
-            residues = new ArrayList<String>();
+            residues = new ArrayList<>();
         }
         return this.residues;
     }
