@@ -10,6 +10,7 @@ Currently, the jmzIdentML supports the two major mzIdentML versions:
 
 - [mzIdentML 1.1](https://www.psidev.info/mzidentml#mzIdentML1_1_1)
 - [mzIdentML 1.2](https://www.psidev.info/mzidentml#mzid12)
+- [mzIdentML 1.3](https://www.psidev.info/mzidentml#mzid13)
 
 ## jmzIdentML API
 

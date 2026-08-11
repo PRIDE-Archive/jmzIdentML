@@ -25,7 +25,9 @@ public enum MzIdentMLVersion {
     Version_1_1(ModelConstants.MZIDML_NS_1_1, ModelConstants.MZIDML_VERSION_1_1,
                 ModelConstants.MZIDML_SCHEMA_1_1),
     Version_1_2(ModelConstants.MZIDML_NS_1_2, ModelConstants.MZIDML_VERSION_1_2,
-                ModelConstants.MZIDML_SCHEMA_1_2);
+                ModelConstants.MZIDML_SCHEMA_1_2),
+    Version_1_3(ModelConstants.MZIDML_NS_1_3, ModelConstants.MZIDML_VERSION_1_3,
+                ModelConstants.MZIDML_SCHEMA_1_3);
 
     private final String MZIDML_NS;
     private final String MZIDML_VERSION;
@@ -107,6 +109,8 @@ public enum MzIdentMLVersion {
             return Version_1_1;
         } else if (ver.equals("1.2")) {
             return Version_1_2;
+        } else if (ver.equals("1.3")) {
+            return Version_1_3;
         } else {
             return null;
         }

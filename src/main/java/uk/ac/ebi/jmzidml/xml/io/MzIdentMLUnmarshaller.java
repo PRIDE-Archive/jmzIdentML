@@ -81,8 +81,10 @@ public class MzIdentMLUnmarshaller {
         this.cache = null;
         if (this.getMzIdentMLVersion().startsWith("1.1")){
             this.mzIdentVersion = MzIdentMLVersion.Version_1_1;
-        } else if (this.mzidVersion.startsWith("1.2")){
+        } else if (this.getMzIdentMLVersion().startsWith("1.2")){
             this.mzIdentVersion = MzIdentMLVersion.Version_1_2;
+        } else if (this.getMzIdentMLVersion().startsWith("1.3")){
+            this.mzIdentVersion = MzIdentMLVersion.Version_1_3;
         } else {
             throw new IllegalStateException("The mzIdentML file version is not recognized!");
         }

@@ -50,6 +50,9 @@ public class ModelConstants {
     public static final String MZIDML_NS_1_2 = "http://psidev.info/psi/pi/mzIdentML/1.2";
     public static final String MZIDML_VERSION_1_2 = "1.2.0";
     public static final String MZIDML_SCHEMA_1_2 = "http://www.psidev.info/files/mzIdentML1.2.0.xsd";
+    public static final String MZIDML_NS_1_3 = "http://psidev.info/psi/pi/mzIdentML/1.3";
+    public static final String MZIDML_VERSION_1_3 = "1.3.0";
+    public static final String MZIDML_SCHEMA_1_3 = "http://www.psidev.info/files/mzIdentML1.3.0.xsd";
 
     private static Map<Class, QName> modelQNames = new HashMap<>();
 
